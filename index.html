@@ -2,25 +2,27 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>BlueAI 1.0 – Dein KI Copilot</title>
+  <title>BlueAI 1.0 – KI Copilot</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
-      --bg: #020817;
-      --bg-elevated: #020b1f;
+      --bg: #020617;
+      --bg-soft: #02081a;
+      --bg-elevated: #020b24;
       --accent: #2563eb;
-      --accent-soft: rgba(37, 99, 235, 0.15);
-      --accent-strong: rgba(37, 99, 235, 0.35);
-      --border-subtle: #1f2937;
+      --accent-2: #4f46e5;
+      --accent-soft: rgba(37, 99, 235, 0.18);
+      --border-subtle: rgba(148, 163, 184, 0.35);
       --text: #e5e7eb;
       --text-soft: #9ca3af;
       --danger: #ef4444;
       --success: #22c55e;
+      --radius-xl: 22px;
       --radius-lg: 16px;
       --radius-md: 10px;
       --radius-sm: 6px;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
-      --shadow-chip: 0 10px 25px rgba(15, 23, 42, 0.9);
+      --shadow-strong: 0 30px 80px rgba(15, 23, 42, 0.95);
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.85);
       --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Segoe UI", sans-serif;
     }
@@ -32,7 +34,7 @@
     body {
       margin: 0;
       font-family: var(--font-sans);
-      background: radial-gradient(circle at top, #0b1120 0, #020617 45%, #000 100%);
+      background: radial-gradient(circle at top, #020617 0, #000 55%);
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -40,52 +42,64 @@
       justify-content: center;
     }
 
-    .app-shell {
+    /* AUTH SCREEN */
+
+    .auth-screen {
+      position: fixed;
+      inset: 0;
       display: flex;
-      width: 100%;
-      max-width: 1200px;
-      margin: 24px;
-      border-radius: 24px;
-      overflow: hidden;
-      background: radial-gradient(circle at top left, #020617 0, #020617 40%, #000 100%);
-      border: 1px solid rgba(148, 163, 184, 0.15);
-      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.9);
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #020617 0, #000 60%);
+      z-index: 50;
     }
 
-    /* SIDEBAR */
+    .auth-shell {
+      width: 100%;
+      max-width: 960px;
+      padding: 24px;
+    }
 
-    .sidebar {
-      width: 280px;
-      background: radial-gradient(circle at top left, #020617 0, #020617 40%, #020617 100%);
-      border-right: 1px solid rgba(148, 163, 184, 0.15);
-      padding: 18px 18px 18px 18px;
+    .auth-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 20px;
+      border-radius: 28px;
+      background: radial-gradient(circle at top left, #020617 0, #020617 40%, #000 100%);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-strong);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .auth-left {
+      padding: 26px 26px 22px 26px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 18px;
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.25), #020617 55%);
     }
 
-    .brand-row {
+    .auth-brand-row {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 8px;
     }
 
     .brand-logo {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       border-radius: 999px;
       background: conic-gradient(from 180deg, #0ea5e9, #2563eb, #4f46e5, #0ea5e9);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9), 0 12px 30px rgba(37, 99, 235, 0.7);
-      position: relative;
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9), 0 18px 40px rgba(37, 99, 235, 0.9);
     }
 
     .brand-logo-inner {
-      width: 18px;
-      height: 18px;
+      width: 22px;
+      height: 22px;
       border-radius: 999px;
       background: radial-gradient(circle at 30% 20%, #e0f2fe 0, #1d4ed8 45%, #020617 100%);
       box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.9);
@@ -93,25 +107,249 @@
 
     .brand-text-main {
       font-weight: 600;
-      letter-spacing: 0.03em;
-      font-size: 16px;
+      letter-spacing: 0.04em;
+      font-size: 18px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .brand-badge {
       font-size: 10px;
-      padding: 2px 6px;
+      padding: 3px 8px;
       border-radius: 999px;
-      background: rgba(37, 99, 235, 0.18);
-      border: 1px solid rgba(96, 165, 250, 0.4);
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid rgba(96, 165, 250, 0.6);
       color: #bfdbfe;
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
 
     .brand-sub {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-top: 2px;
+    }
+
+    .auth-title {
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    .auth-sub {
+      font-size: 13px;
+      color: var(--text-soft);
+      max-width: 420px;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .auth-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+    }
+
+    .auth-input {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      padding: 9px 13px;
+      font-size: 13px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .auth-input::placeholder {
+      color: #6b7280;
+    }
+
+    .auth-btn-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .auth-btn {
+      border-radius: 999px;
+      border: none;
+      padding: 9px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: 0 14px 32px rgba(37, 99, 235, 0.9);
+      white-space: nowrap;
+    }
+
+    .auth-btn.secondary {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text);
+      box-shadow: none;
+    }
+
+    .auth-message {
+      font-size: 11px;
+      margin-top: 4px;
+      min-height: 14px;
+    }
+
+    .auth-message.error {
+      color: var(--danger);
+    }
+
+    .auth-message.success {
+      color: var(--success);
+    }
+
+    .auth-meta-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 11px;
+      color: #9ca3af;
+      flex-wrap: wrap;
+    }
+
+    .auth-chip {
+      border-radius: 999px;
+      padding: 4px 8px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .auth-chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .auth-right {
+      padding: 26px 24px 22px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .auth-right-card {
+      border-radius: 20px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), #020617);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 14px 14px 12px 14px;
+      box-shadow: var(--shadow-soft);
+      font-size: 12px;
+      color: var(--text-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .auth-right-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .auth-right-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .auth-right-pill {
+      border-radius: 999px;
+      padding: 6px 8px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.95);
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .auth-right-pill-label {
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 10px;
+    }
+
+    .auth-right-pill-value {
+      color: var(--text);
+    }
+
+    .auth-right-footer {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 800px) {
+      .auth-card {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .auth-right {
+        padding: 0 18px 18px 18px;
+      }
+    }
+
+    /* APP SHELL */
+
+    .app-shell {
+      display: none;
+      width: 100%;
+      max-width: 1280px;
+      margin: 20px;
+      border-radius: 26px;
+      overflow: hidden;
+      background: radial-gradient(circle at top left, #020617 0, #020617 40%, #000 100%);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .sidebar {
+      width: 280px;
+      background: radial-gradient(circle at top left, #020617 0, #020617 40%, #020617 100%);
+      border-right: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 18px 16px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .sidebar-brand-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .sidebar-brand-text-main {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sidebar-brand-sub {
       font-size: 11px;
       color: var(--text-soft);
     }
@@ -121,8 +359,8 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: #6b7280;
-      margin-top: 8px;
-      margin-bottom: 6px;
+      margin-top: 4px;
+      margin-bottom: 4px;
     }
 
     .chip-row {
@@ -136,18 +374,17 @@
       padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.35);
-      color: #e5e7eb;
-      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), rgba(15, 23, 42, 0.9));
-      box-shadow: var(--shadow-chip);
+      color: var(--text);
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), rgba(15, 23, 42, 0.95));
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9);
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      cursor: default;
     }
 
     .chip-dot {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 999px;
       background: #22c55e;
       box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
@@ -164,22 +401,19 @@
 
     .sidebar-card {
       border-radius: 18px;
-      padding: 12px 12px 12px 12px;
-      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), rgba(15, 23, 42, 0.95));
+      padding: 12px 12px 10px 12px;
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), rgba(15, 23, 42, 0.98));
       border: 1px solid rgba(148, 163, 184, 0.4);
       box-shadow: var(--shadow-soft);
+      font-size: 12px;
+      color: var(--text-soft);
     }
 
     .sidebar-card-title {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 500;
       margin-bottom: 4px;
-    }
-
-    .sidebar-card-sub {
-      font-size: 11px;
-      color: #9ca3af;
-      margin-bottom: 8px;
+      color: var(--text);
     }
 
     .sidebar-metric-row {
@@ -192,7 +426,7 @@
       flex: 1;
       border-radius: 999px;
       padding: 6px 8px;
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.95);
       border: 1px solid rgba(148, 163, 184, 0.4);
       font-size: 10px;
       display: flex;
@@ -207,8 +441,8 @@
     }
 
     .sidebar-metric-value {
+      color: var(--text);
       font-size: 11px;
-      color: #e5e7eb;
     }
 
     .sidebar-footer {
@@ -220,12 +454,6 @@
       gap: 6px;
     }
 
-    .sidebar-footer span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
     .status-dot {
       width: 8px;
       height: 8px;
@@ -234,11 +462,17 @@
       box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
     }
 
+    .sidebar-footer span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     .logout-btn {
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.9);
-      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text);
       padding: 6px 10px;
       font-size: 11px;
       cursor: pointer;
@@ -248,7 +482,7 @@
     }
 
     .logout-btn:hover {
-      background: rgba(31, 41, 55, 0.9);
+      background: rgba(31, 41, 55, 0.95);
     }
 
     /* MAIN */
@@ -257,8 +491,8 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      padding: 18px 18px 18px 18px;
-      gap: 12px;
+      padding: 16px 16px 14px 16px;
+      gap: 10px;
       position: relative;
       overflow: hidden;
     }
@@ -268,33 +502,35 @@
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      margin-bottom: 4px;
     }
 
     .main-title {
-      font-size: 18px;
-      font-weight: 500;
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
 
-    .main-title span:nth-child(2) {
+    .main-title span:first-child {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .main-title span:last-child {
       font-size: 12px;
-      color: #9ca3af;
+      color: var(--text-soft);
     }
 
     .model-pill {
       border-radius: 999px;
       padding: 6px 10px;
       font-size: 11px;
-      border: 1px solid rgba(96, 165, 250, 0.6);
-      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.3), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(96, 165, 250, 0.7);
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.3), rgba(15, 23, 42, 0.98));
       color: #dbeafe;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: var(--shadow-chip);
+      box-shadow: 0 10px 26px rgba(37, 99, 235, 0.9);
     }
 
     .model-pill-dot {
@@ -304,106 +540,42 @@
       background: #22c55e;
     }
 
-    .auth-card {
-      border-radius: 18px;
-      padding: 16px 16px 14px 16px;
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98));
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-
-    .auth-card-left {
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+      gap: 10px;
       flex: 1;
+      min-height: 0;
     }
 
-    .auth-title {
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 4px;
+    @media (max-width: 980px) {
+      .app-shell {
+        margin: 0;
+        border-radius: 0;
+      }
+      .main-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .sidebar {
+        width: 240px;
+      }
     }
 
-    .auth-sub {
-      font-size: 12px;
-      color: #9ca3af;
-      margin-bottom: 10px;
+    @media (max-width: 780px) {
+      .app-shell {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      }
     }
 
-    .auth-form {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .auth-input {
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 999px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      padding: 8px 12px;
-      font-size: 12px;
-      color: #e5e7eb;
-      min-width: 160px;
-      outline: none;
-    }
-
-    .auth-input::placeholder {
-      color: #6b7280;
-    }
-
-    .auth-btn {
-      border-radius: 999px;
-      border: none;
-      padding: 8px 14px;
-      font-size: 12px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: linear-gradient(135deg, #2563eb, #4f46e5);
-      color: white;
-      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.7);
-      white-space: nowrap;
-    }
-
-    .auth-btn.secondary {
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: #e5e7eb;
-      box-shadow: none;
-    }
-
-    .auth-error {
-      font-size: 11px;
-      color: var(--danger);
-      margin-top: 6px;
-    }
-
-    .auth-success {
-      font-size: 11px;
-      color: var(--success);
-      margin-top: 6px;
-    }
-
-    .auth-card-right {
-      width: 180px;
-      font-size: 11px;
-      color: #9ca3af;
-      border-left: 1px dashed rgba(75, 85, 99, 0.8);
-      padding-left: 12px;
-    }
-
-    .auth-card-right strong {
-      color: #e5e7eb;
-    }
-
-    /* CHAT */
+    /* CHAT PANEL */
 
     .chat-shell {
-      flex: 1;
-      border-radius: 18px;
+      border-radius: var(--radius-xl);
       background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), #020617);
       border: 1px solid rgba(148, 163, 184, 0.4);
       box-shadow: var(--shadow-soft);
@@ -453,19 +625,20 @@
       font-size: 13px;
       line-height: 1.4;
       border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.95);
-      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.97);
+      color: var(--text);
       position: relative;
+      white-space: pre-wrap;
     }
 
     .chat-message.user .bubble {
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(79, 70, 229, 0.9));
-      border-color: rgba(129, 140, 248, 0.9);
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(79, 70, 229, 0.95));
+      border-color: rgba(129, 140, 248, 0.95);
     }
 
     .bubble-meta {
       font-size: 10px;
-      color: #9ca3af;
+      color: var(--text-soft);
       margin-top: 4px;
     }
 
@@ -473,7 +646,7 @@
       font-size: 10px;
       padding: 2px 6px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.95);
       border: 1px solid rgba(148, 163, 184, 0.6);
       color: #9ca3af;
       display: inline-flex;
@@ -496,7 +669,7 @@
       justify-content: center;
       text-align: center;
       font-size: 13px;
-      color: #9ca3af;
+      color: var(--text-soft);
       padding: 0 40px;
     }
 
@@ -526,10 +699,10 @@
       flex: 1;
       border-radius: 999px;
       border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.95);
+      background: rgba(15, 23, 42, 0.97);
       padding: 8px 12px;
       font-size: 13px;
-      color: #e5e7eb;
+      color: var(--text);
       outline: none;
     }
 
@@ -546,9 +719,9 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
       color: white;
-      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.7);
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.9);
       white-space: nowrap;
     }
 
@@ -599,98 +772,316 @@
       }
     }
 
-    .badge-auth-required {
+    /* IMAGE PANEL */
+
+    .image-shell {
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), #020617);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .image-header {
+      padding: 10px 14px 6px 14px;
+      border-bottom: 1px solid rgba(55, 65, 81, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .image-header-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .image-header-title span:first-child {
+      font-weight: 500;
+    }
+
+    .image-header-title span:last-child {
+      color: var(--text-soft);
       font-size: 11px;
-      padding: 4px 8px;
+    }
+
+    .image-header-pill {
       border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.7);
+      padding: 4px 8px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 10px;
       color: #9ca3af;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .badge-auth-required span {
+    .image-header-pill span {
       width: 6px;
       height: 6px;
       border-radius: 999px;
-      background: #f97316;
+      background: #22c55e;
     }
 
-    @media (max-width: 900px) {
-      .app-shell {
-        flex-direction: column;
-        margin: 0;
-        border-radius: 0;
-      }
-      .sidebar {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid rgba(148, 163, 184, 0.15);
-      }
+    .image-main {
+      flex: 1;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
     }
 
-    @media (max-width: 600px) {
-      .auth-card {
-        flex-direction: column;
-      }
-      .auth-card-right {
-        width: 100%;
-        border-left: none;
-        border-top: 1px dashed rgba(75, 85, 99, 0.8);
-        padding-left: 0;
-        padding-top: 10px;
-      }
+    .image-preview {
+      padding: 10px 12px 6px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #020617, #000);
+    }
+
+    .image-preview-inner {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 4 / 3;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: radial-gradient(circle at top left, #0f172a, #020617);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-placeholder-text {
+      font-size: 11px;
+      color: #6b7280;
+      text-align: center;
+      padding: 0 16px;
+    }
+
+    .image-prompt-row {
+      padding: 8px 12px 10px 12px;
+      border-top: 1px solid rgba(55, 65, 81, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), #020617);
+    }
+
+    .image-input-main {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .image-input {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.97);
+      padding: 8px 12px;
+      font-size: 12px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .image-input::placeholder {
+      color: #6b7280;
+    }
+
+    .image-btn {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.9);
+      white-space: nowrap;
+    }
+
+    .image-meta {
+      font-size: 10px;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .image-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .image-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: #22c55e;
     }
   </style>
 </head>
 <body>
-  <div class="app-shell">
+  <!-- AUTH SCREEN -->
+  <div class="auth-screen" id="authScreen">
+    <div class="auth-shell">
+      <div class="auth-card">
+        <div class="auth-left">
+          <div class="auth-brand-row">
+            <div class="brand-logo">
+              <div class="brand-logo-inner"></div>
+            </div>
+            <div>
+              <div class="brand-text-main">
+                BlueAI
+                <span class="brand-badge">Model 1.0</span>
+              </div>
+              <div class="brand-sub">Dein persönlicher KI‑Copilot</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="auth-title">Willkommen bei BlueAI 1.0</div>
+            <div class="auth-sub">
+              Melde dich an oder registriere dich, damit dein Chat‑Verlauf und deine Bild‑Prompts sicher in Firebase gespeichert werden.
+            </div>
+          </div>
+
+          <form class="auth-form" id="authForm">
+            <div>
+              <div class="auth-label">E‑Mail</div>
+              <input
+                type="email"
+                id="emailInput"
+                class="auth-input"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+            <div>
+              <div class="auth-label">Passwort</div>
+              <input
+                type="password"
+                id="passwordInput"
+                class="auth-input"
+                placeholder="Mindestens 6 Zeichen"
+                required
+              />
+            </div>
+            <div class="auth-btn-row">
+              <button type="submit" class="auth-btn" id="loginBtn">
+                Anmelden
+              </button>
+              <button type="button" class="auth-btn secondary" id="registerBtn">
+                Registrieren
+              </button>
+            </div>
+            <div class="auth-message" id="authMessage"></div>
+          </form>
+
+          <div class="auth-meta-row">
+            <div class="auth-chip">
+              <span class="auth-chip-dot"></span>
+              Firebase Auth & Realtime Database aktiv
+            </div>
+            <div class="auth-chip">
+              BlueAI speichert deinen Verlauf pro Nutzer‑ID
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-right">
+          <div class="auth-right-card">
+            <div class="auth-right-title">Was BlueAI 1.0 kann</div>
+            <div>
+              BlueAI 1.0 ist ein simuliertes KI‑Modell in deiner eigenen Oberfläche:
+              Chat‑Antworten, Bild‑Prompt‑Generierung und ein Canvas‑basierter Bild‑Generator.
+            </div>
+            <div class="auth-right-grid">
+              <div class="auth-right-pill">
+                <div class="auth-right-pill-label">Chat</div>
+                <div class="auth-right-pill-value">Kontext‑sensitiv, mehrere Antwort‑Modi</div>
+              </div>
+              <div class="auth-right-pill">
+                <div class="auth-right-pill-label">Bild</div>
+                <div class="auth-right-pill-value">Prompt + generiertes Canvas‑Bild</div>
+              </div>
+              <div class="auth-right-pill">
+                <div class="auth-right-pill-label">Speicherung</div>
+                <div class="auth-right-pill-value">Pro Nutzer in Realtime Database</div>
+              </div>
+              <div class="auth-right-pill">
+                <div class="auth-right-pill-label">Hosting</div>
+                <div class="auth-right-pill-value">Single‑File, Netlify‑ready</div>
+              </div>
+            </div>
+            <div class="auth-right-footer">
+              Nach dem Login kommst du direkt in die BlueAI‑Konsole mit Chat und Bild‑Panel.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APP SHELL -->
+  <div class="app-shell" id="appShell">
     <aside class="sidebar">
-      <div class="brand-row">
+      <div class="sidebar-brand-row">
         <div class="brand-logo">
           <div class="brand-logo-inner"></div>
         </div>
         <div>
-          <div class="brand-text-main">
+          <div class="sidebar-brand-text-main">
             BlueAI
-            <span class="brand-badge">Model 1.0</span>
+            <span class="brand-badge">1.0</span>
           </div>
-          <div class="brand-sub">Dein persönlicher KI‑Copilot</div>
+          <div class="sidebar-brand-sub">Copilot Oberfläche</div>
         </div>
       </div>
 
       <div>
-        <div class="sidebar-section-title">Modus & Fähigkeiten</div>
+        <div class="sidebar-section-title">Modi & Fähigkeiten</div>
         <div class="chip-row">
           <div class="chip">
             <span class="chip-dot"></span>
             Konversation
           </div>
           <div class="chip">
-            Bild‑Prompts
-            <span class="chip-pill">Generierung simuliert</span>
+            Bild‑Generator
+            <span class="chip-pill">Canvas</span>
           </div>
           <div class="chip">
-            Kontext
-            <span class="chip-pill">Chat‑Verlauf</span>
+            Prompt‑Engine
+            <span class="chip-pill">Text → Bild‑Prompt</span>
           </div>
         </div>
       </div>
 
       <div class="sidebar-card">
-        <div class="sidebar-card-title">BlueAI 1.0 Trainingsprofil</div>
-        <div class="sidebar-card-sub">
-          Antworten werden in deinem privaten Chat‑Verlauf gespeichert und als „Pseudo‑Training“ genutzt, um bessere Vorschläge zu simulieren.
+        <div class="sidebar-card-title">BlueAI 1.0 Session</div>
+        <div>
+          Antworten werden in deinem privaten Verlauf gespeichert und als „Pseudo‑Training“ genutzt, um Stil‑Hinweise zu simulieren.
         </div>
         <div class="sidebar-metric-row">
           <div class="sidebar-metric">
-            <div class="sidebar-metric-label">Session‑Kontext</div>
-            <div class="sidebar-metric-value" id="metric-turns">0 Nachrichten</div>
+            <div class="sidebar-metric-label">Nachrichten</div>
+            <div class="sidebar-metric-value" id="metric-turns">0</div>
           </div>
           <div class="sidebar-metric">
-            <div class="sidebar-metric-label">Antwort‑Stil</div>
-            <div class="sidebar-metric-value" id="metric-style">Ausgewogen</div>
+            <div class="sidebar-metric-label">Bild‑Prompts</div>
+            <div class="sidebar-metric-value" id="metric-images">0</div>
           </div>
         </div>
       </div>
@@ -698,9 +1089,9 @@
       <div class="sidebar-footer">
         <span>
           <span class="status-dot"></span>
-          BlueAI 1.0 ist bereit für deine Fragen.
+          BlueAI 1.0 ist bereit.
         </span>
-        <button class="logout-btn" id="logoutBtn" style="display:none;">
+        <button class="logout-btn" id="logoutBtn">
           ⎋ Abmelden
         </button>
         <span id="userInfo"></span>
@@ -710,8 +1101,8 @@
     <main class="main">
       <header class="main-header">
         <div class="main-title">
-          <span>BlueAI Copilot Oberfläche</span>
-          <span>Stell Fragen, lass dir Ideen bauen oder simuliere Bild‑Prompts.</span>
+          <span>BlueAI Copilot Konsole</span>
+          <span>Chat links, Bild‑Generator rechts – alles an einem Ort.</span>
         </div>
         <div class="model-pill">
           <span class="model-pill-dot"></span>
@@ -719,80 +1110,87 @@
         </div>
       </header>
 
-      <section class="auth-card" id="authCard">
-        <div class="auth-card-left">
-          <div class="auth-title">Login oder Registrierung</div>
-          <div class="auth-sub">
-            Melde dich an, damit BlueAI deinen Chat‑Verlauf sicher in Firebase speichert.
-          </div>
-          <form class="auth-form" id="authForm">
-            <input
-              type="email"
-              id="emailInput"
-              class="auth-input"
-              placeholder="E‑Mail"
-              required
-            />
-            <input
-              type="password"
-              id="passwordInput"
-              class="auth-input"
-              placeholder="Passwort"
-              required
-            />
-            <button type="submit" class="auth-btn" id="loginBtn">
-              Anmelden
-            </button>
-            <button type="button" class="auth-btn secondary" id="registerBtn">
-              Registrieren
-            </button>
-          </form>
-          <div id="authMessage"></div>
-        </div>
-        <div class="auth-card-right">
-          <strong>Hinweis:</strong>  
-          BlueAI nutzt Firebase Authentication und Realtime Database.  
-          Dein Chat‑Verlauf ist nur für dein Konto lesbar.  
-          Du kannst später echte Bild‑APIs anbinden – aktuell werden Bild‑Prompts textuell simuliert.
-        </div>
-      </section>
-
-      <section class="chat-shell">
-        <div class="chat-messages" id="chatMessages">
-          <div class="chat-empty" id="chatEmpty">
-            Willkommen bei <strong>BlueAI 1.0</strong>.<br />
-            <span>
-              Melde dich an, stelle eine Frage wie<br />
-              „Erstelle mir einen Bild‑Prompt für ein futuristisches Stadt‑Poster“<br />
-              oder „Hilf mir beim Lernen für die Schule“.
-            </span>
-          </div>
-        </div>
-        <div class="chat-input-row">
-          <div class="chat-input-main">
-            <input
-              type="text"
-              id="chatInput"
-              class="chat-input"
-              placeholder="Frage BlueAI etwas …"
-            />
-            <button class="chat-send-btn" id="sendBtn" disabled>
-              Senden
-            </button>
-          </div>
-          <div class="chat-input-meta">
-            <span>
-              <span class="typing-dot"></span>
-              <span class="typing-dot"></span>
-              <span class="typing-dot"></span>
-              BlueAI 1.0 generiert Antworten lokal simuliert.
-            </span>
-            <span id="authHint">
-              <span class="badge-auth-required">
-                <span></span>
-                Anmeldung erforderlich, um Chat zu speichern.
+      <section class="main-grid">
+        <!-- CHAT PANEL -->
+        <div class="chat-shell">
+          <div class="chat-messages" id="chatMessages">
+            <div class="chat-empty" id="chatEmpty">
+              Willkommen im BlueAI‑Chat.<br />
+              <span>
+                Frag z.B.: „Erkläre mir ein Thema“, „Hilf mir beim Lernen“ oder „Erstelle einen Bild‑Prompt für ein futuristisches Stadt‑Poster“.
               </span>
-            </span>
+            </div>
+          </div>
+          <div class="chat-input-row">
+            <div class="chat-input-main">
+              <input
+                type="text"
+                id="chatInput"
+                class="chat-input"
+                placeholder="Frage BlueAI etwas …"
+              />
+              <button class="chat-send-btn" id="sendBtn">
+                Senden
+              </button>
+            </div>
+            <div class="chat-input-meta">
+              <span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                BlueAI 1.0 generiert simulierte Antworten.
+              </span>
+              <span id="chatMetaHint">
+                Verlauf wird in Firebase gespeichert.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- IMAGE PANEL -->
+        <div class="image-shell">
+          <div class="image-header">
+            <div class="image-header-title">
+              <span>BlueAI Bild‑Generator</span>
+              <span>Prompt → Bild‑Prompt + generiertes Canvas‑Bild.</span>
+            </div>
+            <div class="image-header-pill">
+              <span></span>
+              BlueAI 1.0 · Visual Mode
+            </div>
+          </div>
+          <div class="image-main">
+            <div class="image-preview">
+              <div class="image-preview-inner">
+                <canvas id="imageCanvas" width="640" height="480"></canvas>
+                <div class="image-placeholder-text" id="imagePlaceholder">
+                  Noch kein Bild generiert.<br />
+                  Gib rechts unten einen Prompt ein, z.B. „Futuristische Stadt bei Nacht mit Neon‑Lichtern“.
+                </div>
+              </div>
+            </div>
+            <div class="image-prompt-row">
+              <div class="image-input-main">
+                <input
+                  type="text"
+                  id="imagePromptInput"
+                  class="image-input"
+                  placeholder="Beschreibe das Bild, das du sehen willst …"
+                />
+                <button class="image-btn" id="imageGenerateBtn">
+                  Bild generieren
+                </button>
+              </div>
+              <div class="image-meta">
+                <span>
+                  <span class="image-dot"></span>
+                  BlueAI erzeugt einen detaillierten Bild‑Prompt und zeichnet ein Canvas‑Bild.
+                </span>
+                <span id="imageMetaHint">
+                  Letzter Prompt: keiner
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -836,62 +1234,70 @@
     const auth = getAuth(app);
     const db = getDatabase(app);
 
-    // UI Elemente
+    // AUTH UI
+    const authScreen = document.getElementById("authScreen");
+    const appShell = document.getElementById("appShell");
     const authForm = document.getElementById("authForm");
     const emailInput = document.getElementById("emailInput");
     const passwordInput = document.getElementById("passwordInput");
     const loginBtn = document.getElementById("loginBtn");
     const registerBtn = document.getElementById("registerBtn");
     const authMessage = document.getElementById("authMessage");
+
+    // APP UI
     const logoutBtn = document.getElementById("logoutBtn");
     const userInfo = document.getElementById("userInfo");
-    const authCard = document.getElementById("authCard");
-    const authHint = document.getElementById("authHint");
+    const metricTurns = document.getElementById("metric-turns");
+    const metricImages = document.getElementById("metric-images");
 
     const chatMessages = document.getElementById("chatMessages");
     const chatEmpty = document.getElementById("chatEmpty");
     const chatInput = document.getElementById("chatInput");
     const sendBtn = document.getElementById("sendBtn");
-    const metricTurns = document.getElementById("metric-turns");
+
+    const imageCanvas = document.getElementById("imageCanvas");
+    const imagePlaceholder = document.getElementById("imagePlaceholder");
+    const imagePromptInput = document.getElementById("imagePromptInput");
+    const imageGenerateBtn = document.getElementById("imageGenerateBtn");
+    const imageMetaHint = document.getElementById("imageMetaHint");
 
     let currentUser = null;
     let messageCount = 0;
+    let imageCount = 0;
     let isGenerating = false;
 
     function setAuthMessage(text, type = "error") {
       authMessage.textContent = text;
-      authMessage.className = type === "error" ? "auth-error" : "auth-success";
+      authMessage.className = "auth-message " + (type === "error" ? "error" : "success");
     }
 
     function clearAuthMessage() {
       authMessage.textContent = "";
-      authMessage.className = "";
+      authMessage.className = "auth-message";
     }
 
-    function updateAuthUI(user) {
-      if (user) {
-        currentUser = user;
-        authCard.style.display = "none";
-        logoutBtn.style.display = "inline-flex";
-        userInfo.textContent = "Angemeldet als: " + (user.email || user.uid);
-        authHint.innerHTML =
-          '<span style="font-size:11px;color:#9ca3af;">Chat‑Verlauf wird in Firebase gespeichert.</span>';
-        sendBtn.disabled = false;
-        loadChatHistory();
-      } else {
-        currentUser = null;
-        authCard.style.display = "flex";
-        logoutBtn.style.display = "none";
-        userInfo.textContent = "";
-        authHint.innerHTML =
-          '<span class="badge-auth-required"><span></span>Anmeldung erforderlich, um Chat zu speichern.</span>';
-        sendBtn.disabled = true;
-        clearChatUI();
-      }
+    function showApp(user) {
+      currentUser = user;
+      authScreen.style.display = "none";
+      appShell.style.display = "flex";
+      userInfo.textContent = "Angemeldet als: " + (user.email || user.uid);
+      loadChatHistory();
+    }
+
+    function showAuth() {
+      currentUser = null;
+      authScreen.style.display = "flex";
+      appShell.style.display = "none";
+      userInfo.textContent = "";
+      clearChatUI();
     }
 
     onAuthStateChanged(auth, (user) => {
-      updateAuthUI(user);
+      if (user) {
+        showApp(user);
+      } else {
+        showAuth();
+      }
     });
 
     authForm.addEventListener("submit", async (e) => {
@@ -931,11 +1337,13 @@
       await signOut(auth);
     });
 
+    // CHAT LOGIK
+
     function clearChatUI() {
       chatMessages.innerHTML = "";
       chatMessages.appendChild(chatEmpty);
       messageCount = 0;
-      metricTurns.textContent = "0 Nachrichten";
+      metricTurns.textContent = "0";
     }
 
     function appendMessage({ from, text, meta, tag }) {
@@ -947,6 +1355,7 @@
 
       const avatar = document.createElement("div");
       avatar.className = "avatar" + (from === "user" ? " user" : "");
+
       const bubble = document.createElement("div");
       bubble.className = "bubble";
       bubble.textContent = text;
@@ -975,7 +1384,7 @@
       chatMessages.appendChild(wrapper);
       chatMessages.scrollTop = chatMessages.scrollHeight;
       messageCount++;
-      metricTurns.textContent = messageCount + " Nachrichten";
+      metricTurns.textContent = String(messageCount);
     }
 
     function addTypingIndicator() {
@@ -1011,6 +1420,18 @@
 
     function pseudoBlueAIResponse(prompt, history) {
       const lower = prompt.toLowerCase();
+      const turns = history.length;
+
+      const styleHint =
+        turns > 10
+          ? "Ich versuche, deinen bisherigen Stil möglichst genau zu spiegeln."
+          : turns > 4
+          ? "Ich nutze deinen bisherigen Verlauf als leichten Kontext."
+          : "Ich antworte bewusst neutral und klar.";
+
+      const baseIntro =
+        "BlueAI 1.0 antwortet dir mit einem simulierten, aber strukturierten KI‑Modell:\n\n";
+
       const isImagePrompt =
         lower.includes("bild") ||
         lower.includes("image") ||
@@ -1019,17 +1440,10 @@
         lower.includes("art") ||
         lower.includes("illustration");
 
-      const turns = history.length;
-      const styleHint =
-        turns > 8
-          ? "Ich versuche, deinen bisherigen Stil zu spiegeln."
-          : turns > 3
-          ? "Ich nutze deinen bisherigen Verlauf als leichten Kontext."
-          : "Ich antworte neutral und klar.";
-
       if (isImagePrompt) {
         return (
-          "Hier ist ein detaillierter Bild‑Prompt, den du in einem Bild‑Generator nutzen kannst:\n\n" +
+          baseIntro +
+          "🔹 Bild‑Prompt‑Vorschlag:\n\n" +
           "» " +
           prompt +
           " «\n\n" +
@@ -1038,52 +1452,64 @@
           "- Farbstimmung: kräftige Blautöne, Neon‑Akzente, hoher Kontrast\n" +
           "- Kamera: 35mm, leichte Weitwinkel‑Perspektive, Tiefenschärfe\n" +
           "- Qualität: 4K, ultra‑detailliert, scharfe Konturen\n\n" +
-          "Hinweis: BlueAI 1.0 simuliert aktuell nur die Prompt‑Generierung – du kannst diesen Text in Midjourney, DALL·E oder einem anderen Bild‑Tool verwenden.\n\n" +
+          "Du kannst diesen Prompt direkt in einem Bild‑Generator (z.B. Midjourney, DALL·E etc.) verwenden.\n\n" +
           styleHint
         );
       }
 
       if (lower.includes("erkläre") || lower.includes("erklären") || lower.includes("warum")) {
         return (
-          "Gerne erkläre ich dir das Schritt für Schritt:\n\n" +
+          baseIntro +
           "1. Ich fasse das Thema zuerst in einfachen Worten zusammen.\n" +
-          "2. Danach gehe ich etwas tiefer und zeige dir Zusammenhänge.\n" +
-          "3. Zum Schluss bekommst du ein kurzes Beispiel oder eine Merkhilfe.\n\n" +
-          "Wenn du magst, kannst du mir sagen, auf welchem Niveau du dich gerade befindest (z.B. Schule, Studium, Beruf), dann passe ich die Erklärung an.\n\n" +
+          "2. Danach gehe ich tiefer auf Zusammenhänge und Hintergründe ein.\n" +
+          "3. Zum Schluss bekommst du eine Merkhilfe oder ein Beispiel.\n\n" +
+          "Schreib mir gerne dazu, auf welchem Level du bist (Schule, Studium, Beruf), dann passe ich die Erklärung an.\n\n" +
           styleHint
         );
       }
 
       if (lower.includes("code") || lower.includes("programm") || lower.includes("javascript")) {
         return (
-          "Du möchtest etwas mit Code machen – nice.\n\n" +
-          "Ich kann dir z.B. helfen, kleine Snippets zu entwerfen, dir die Struktur zu erklären oder dir Ideen geben, wie du dein Projekt aufbauen kannst.\n" +
-          "Beschreib mir kurz:\n" +
-          "- Sprache/Framework (z.B. JavaScript, React, Node)\n" +
-          "- Ziel (z.B. Login‑System, API‑Call, UI‑Komponente)\n\n" +
-          "Dann skizziere ich dir einen klaren Ansatz.\n\n" +
+          baseIntro +
+          "Du willst etwas mit Code machen – nice.\n\n" +
+          "- Sag mir Sprache/Framework (z.B. JavaScript, React, Node).\n" +
+          "- Beschreibe kurz dein Ziel (Login‑System, API‑Call, UI‑Komponente, etc.).\n" +
+          "- Ich skizziere dir dann einen klaren Ansatz mit Schritten.\n\n" +
           styleHint
         );
       }
 
       if (lower.includes("schule") || lower.includes("lernen") || lower.includes("prüfung")) {
         return (
-          "Lernen ist viel leichter, wenn man Struktur reinbringt.\n\n" +
-          "Ich kann dir z.B. helfen mit:\n" +
-          "- Zusammenfassungen in eigenen Worten\n" +
-          "- Lernplänen (z.B. 30‑Minuten‑Blöcke)\n" +
-          "- Verständnisfragen, die du dir selbst stellen kannst\n\n" +
-          "Schreib mir einfach das Thema + dein Ziel (z.B. „Mathe Klausur in 2 Wochen, Thema Bruchrechnung“), dann baue ich dir einen Plan.\n\n" +
+          baseIntro +
+          "Lernen funktioniert besser mit Struktur:\n\n" +
+          "- Ich kann dir Zusammenfassungen in eigenen Worten bauen.\n" +
+          "- Ich kann dir Lernpläne (z.B. 30‑Minuten‑Blöcke) vorschlagen.\n" +
+          "- Ich kann dir Verständnisfragen geben, die du dir selbst stellen kannst.\n\n" +
+          "Schreib mir Thema + Zeitrahmen (z.B. „Mathe Klausur in 2 Wochen, Thema Bruchrechnung“), dann baue ich dir einen Plan.\n\n" +
+          styleHint
+        );
+      }
+
+      if (lower.includes("bewerbung") || lower.includes("lebenslauf") || lower.includes("cv")) {
+        return (
+          baseIntro +
+          "Ich kann dir helfen mit:\n\n" +
+          "- Formulierungen für Anschreiben\n" +
+          "- Struktur für deinen Lebenslauf\n" +
+          "- Ideen, wie du Projekte/Erfahrungen gut beschreibst\n\n" +
+          "Schreib mir kurz: Job‑Titel, Branche und dein aktueller Stand, dann mache ich dir einen Vorschlag.\n\n" +
           styleHint
         );
       }
 
       return (
-        "Spannende Frage. Ich versuche, dir eine klare, strukturierte Antwort zu geben:\n\n" +
-        "- Ich fasse zuerst kurz zusammen, worum es geht.\n" +
-        "- Dann gehe ich auf Details ein, die für dich relevant sein könnten.\n" +
-        "- Wenn sinnvoll, gebe ich dir Beispiele oder Formulierungen, die du direkt nutzen kannst.\n\n" +
-        "Wenn du mir mehr Kontext gibst (z.B. „für Bewerbung“, „für Social Media“, „für Schule“), kann ich die Antwort noch genauer auf dich zuschneiden.\n\n" +
+        baseIntro +
+        "Ich habe deine Frage verstanden und würde so vorgehen:\n\n" +
+        "- Zuerst kläre ich, worum es dir genau geht.\n" +
+        "- Dann gebe ich dir eine strukturierte Antwort mit Bullet‑Points.\n" +
+        "- Wenn sinnvoll, bekommst du Beispiele oder Formulierungen, die du direkt nutzen kannst.\n\n" +
+        "Wenn du mir mehr Kontext gibst (z.B. „für Social Media“, „für Schule“, „für ein Projekt“), kann ich die Antwort noch genauer auf dich zuschneiden.\n\n" +
         styleHint
       );
     }
@@ -1146,7 +1572,7 @@
         });
         await saveMessageToDB(currentUser.uid, { from: "assistant", text: responseText });
         isGenerating = false;
-        sendBtn.disabled = !currentUser;
+        sendBtn.disabled = false;
       }, 800 + Math.random() * 800);
     }
 
@@ -1158,6 +1584,107 @@
     });
 
     sendBtn.addEventListener("click", handleSend);
+
+    // IMAGE GENERATOR (Canvas, lokal)
+
+    function drawGeneratedImage(prompt) {
+      const ctx = imageCanvas.getContext("2d");
+      const w = imageCanvas.width;
+      const h = imageCanvas.height;
+
+      // Hintergrund‑Gradient basierend auf Prompt‑Hash
+      let hash = 0;
+      for (let i = 0; i < prompt.length; i++) {
+        hash = (hash * 31 + prompt.charCodeAt(i)) >>> 0;
+      }
+      const hue1 = hash % 360;
+      const hue2 = (hash * 3) % 360;
+
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, `hsl(${hue1}, 80%, 18%)`);
+      grad.addColorStop(1, `hsl(${hue2}, 80%, 8%)`);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      // „Neon‑Ringe“
+      const rings = 6;
+      for (let i = 0; i < rings; i++) {
+        const radius = (Math.min(w, h) / 2) * (0.2 + i * 0.12);
+        ctx.beginPath();
+        ctx.arc(
+          w / 2 + Math.sin(hash + i) * 20,
+          h / 2 + Math.cos(hash + i) * 20,
+          radius,
+          0,
+          Math.PI * 2
+        );
+        ctx.strokeStyle = `hsla(${(hue1 + i * 20) % 360}, 90%, 60%, 0.35)`;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+      }
+
+      // Text‑Overlay
+      const shortPrompt =
+        prompt.length > 60 ? prompt.slice(0, 57).trim() + "…" : prompt.trim();
+      ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+      ctx.fillRect(16, h - 70, w - 32, 54);
+      ctx.strokeStyle = "rgba(148, 163, 184, 0.6)";
+      ctx.lineWidth = 1;
+      ctx.strokeRect(16.5, h - 69.5, w - 33, 53);
+
+      ctx.fillStyle = "#e5e7eb";
+      ctx.font = "14px system-ui";
+      ctx.fillText("BlueAI 1.0 – generierter Prompt", 24, h - 48);
+      ctx.fillStyle = "#9ca3af";
+      ctx.font = "12px system-ui";
+      ctx.fillText(shortPrompt || "Kein Prompt", 24, h - 28);
+
+      imagePlaceholder.style.display = "none";
+    }
+
+    async function saveImagePromptToDB(userId, prompt) {
+      try {
+        const imgRef = ref(db, "imagePrompts/" + userId);
+        const newRef = push(imgRef);
+        await set(newRef, {
+          prompt,
+          createdAt: serverTimestamp(),
+        });
+      } catch (e) {
+        console.warn("Fehler beim Speichern des Bild‑Prompts:", e);
+      }
+    }
+
+    function handleGenerateImage() {
+      if (!currentUser) return;
+      const prompt = imagePromptInput.value.trim();
+      if (!prompt) return;
+      drawGeneratedImage(prompt);
+      imageCount++;
+      metricImages.textContent = String(imageCount);
+      imageMetaHint.textContent = "Letzter Prompt: " + (prompt.length > 40 ? prompt.slice(0, 37) + "…" : prompt);
+      saveImagePromptToDB(currentUser.uid, prompt);
+    }
+
+    imageGenerateBtn.addEventListener("click", handleGenerateImage);
+    imagePromptInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        handleGenerateImage();
+      }
+    });
+
+    // Initial Canvas leeren
+    (function initCanvas() {
+      const ctx = imageCanvas.getContext("2d");
+      const w = imageCanvas.width;
+      const h = imageCanvas.height;
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, "#020617");
+      grad.addColorStop(1, "#000000");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+    })();
   </script>
 </body>
 </html>
