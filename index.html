@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>BlueAI 1.0 – KI Copilot</title>
+  <title>BlueAI 1.2 – AI Copilot</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
@@ -945,22 +945,22 @@
             <div>
               <div class="brand-text-main">
                 BlueAI
-                <span class="brand-badge">Model 1.0</span>
+                <span class="brand-badge">Model 1.2</span>
               </div>
-              <div class="brand-sub">Dein persönlicher KI‑Copilot</div>
+              <div class="brand-sub">Your personal AI copilot</div>
             </div>
           </div>
 
           <div>
-            <div class="auth-title">Willkommen bei BlueAI 1.0</div>
+            <div class="auth-title">Sign in to BlueAI 1.2</div>
             <div class="auth-sub">
-              Melde dich an oder registriere dich, damit dein Chat‑Verlauf und deine Bild‑Prompts sicher in Firebase gespeichert werden.
+              Use your account so BlueAI can store your chat history and image prompts securely in Firebase.
             </div>
           </div>
 
           <form class="auth-form" id="authForm">
             <div>
-              <div class="auth-label">E‑Mail</div>
+              <div class="auth-label">Email</div>
               <input
                 type="email"
                 id="emailInput"
@@ -970,21 +970,21 @@
               />
             </div>
             <div>
-              <div class="auth-label">Passwort</div>
+              <div class="auth-label">Password</div>
               <input
                 type="password"
                 id="passwordInput"
                 class="auth-input"
-                placeholder="Mindestens 6 Zeichen"
+                placeholder="At least 6 characters"
                 required
               />
             </div>
             <div class="auth-btn-row">
               <button type="submit" class="auth-btn" id="loginBtn">
-                Anmelden
+                Sign in
               </button>
               <button type="button" class="auth-btn secondary" id="registerBtn">
-                Registrieren
+                Register
               </button>
             </div>
             <div class="auth-message" id="authMessage"></div>
@@ -993,41 +993,41 @@
           <div class="auth-meta-row">
             <div class="auth-chip">
               <span class="auth-chip-dot"></span>
-              Firebase Auth & Realtime Database aktiv
+              Firebase Auth & Realtime Database
             </div>
             <div class="auth-chip">
-              BlueAI speichert deinen Verlauf pro Nutzer‑ID
+              BlueAI stores data per user ID
             </div>
           </div>
         </div>
 
         <div class="auth-right">
           <div class="auth-right-card">
-            <div class="auth-right-title">Was BlueAI 1.0 kann</div>
+            <div class="auth-right-title">What BlueAI 1.2 can do</div>
             <div>
-              BlueAI 1.0 ist ein simuliertes KI‑Modell in deiner eigenen Oberfläche:
-              Chat‑Antworten, Bild‑Prompt‑Generierung und ein Canvas‑basierter Bild‑Generator.
+              BlueAI 1.2 is a simulated AI model in your own interface:
+              chat answers, explanations, coding help, prompt generation and a canvas‑based image generator.
             </div>
             <div class="auth-right-grid">
               <div class="auth-right-pill">
                 <div class="auth-right-pill-label">Chat</div>
-                <div class="auth-right-pill-value">Kontext‑sensitiv, mehrere Antwort‑Modi</div>
+                <div class="auth-right-pill-value">Context‑aware, multiple answer styles</div>
               </div>
               <div class="auth-right-pill">
-                <div class="auth-right-pill-label">Bild</div>
-                <div class="auth-right-pill-value">Prompt + generiertes Canvas‑Bild</div>
+                <div class="auth-right-pill-label">Code</div>
+                <div class="auth-right-pill-value">Explains and sketches code snippets</div>
               </div>
               <div class="auth-right-pill">
-                <div class="auth-right-pill-label">Speicherung</div>
-                <div class="auth-right-pill-value">Pro Nutzer in Realtime Database</div>
+                <div class="auth-right-pill-label">Images</div>
+                <div class="auth-right-pill-value">Prompt + generated canvas image</div>
               </div>
               <div class="auth-right-pill">
                 <div class="auth-right-pill-label">Hosting</div>
-                <div class="auth-right-pill-value">Single‑File, Netlify‑ready</div>
+                <div class="auth-right-pill-value">Single file, Netlify‑ready</div>
               </div>
             </div>
             <div class="auth-right-footer">
-              Nach dem Login kommst du direkt in die BlueAI‑Konsole mit Chat und Bild‑Panel.
+              After login you land in the BlueAI console with chat and image tools side by side.
             </div>
           </div>
         </div>
@@ -1045,42 +1045,42 @@
         <div>
           <div class="sidebar-brand-text-main">
             BlueAI
-            <span class="brand-badge">1.0</span>
+            <span class="brand-badge">1.2</span>
           </div>
-          <div class="sidebar-brand-sub">Copilot Oberfläche</div>
+          <div class="sidebar-brand-sub">Copilot console</div>
         </div>
       </div>
 
       <div>
-        <div class="sidebar-section-title">Modi & Fähigkeiten</div>
+        <div class="sidebar-section-title">Modes & capabilities</div>
         <div class="chip-row">
           <div class="chip">
             <span class="chip-dot"></span>
-            Konversation
+            Chat & explanations
           </div>
           <div class="chip">
-            Bild‑Generator
+            Coding help
+            <span class="chip-pill">JS / pseudo</span>
+          </div>
+          <div class="chip">
+            Image generator
             <span class="chip-pill">Canvas</span>
-          </div>
-          <div class="chip">
-            Prompt‑Engine
-            <span class="chip-pill">Text → Bild‑Prompt</span>
           </div>
         </div>
       </div>
 
       <div class="sidebar-card">
-        <div class="sidebar-card-title">BlueAI 1.0 Session</div>
+        <div class="sidebar-card-title">BlueAI 1.2 session</div>
         <div>
-          Antworten werden in deinem privaten Verlauf gespeichert und als „Pseudo‑Training“ genutzt, um Stil‑Hinweise zu simulieren.
+          Your messages are stored in your private history and used as “pseudo‑training” to simulate style awareness.
         </div>
         <div class="sidebar-metric-row">
           <div class="sidebar-metric">
-            <div class="sidebar-metric-label">Nachrichten</div>
+            <div class="sidebar-metric-label">Messages</div>
             <div class="sidebar-metric-value" id="metric-turns">0</div>
           </div>
           <div class="sidebar-metric">
-            <div class="sidebar-metric-label">Bild‑Prompts</div>
+            <div class="sidebar-metric-label">Image prompts</div>
             <div class="sidebar-metric-value" id="metric-images">0</div>
           </div>
         </div>
@@ -1089,10 +1089,10 @@
       <div class="sidebar-footer">
         <span>
           <span class="status-dot"></span>
-          BlueAI 1.0 ist bereit.
+          BlueAI 1.2 is ready.
         </span>
         <button class="logout-btn" id="logoutBtn">
-          ⎋ Abmelden
+          ⎋ Sign out
         </button>
         <span id="userInfo"></span>
       </div>
@@ -1101,12 +1101,12 @@
     <main class="main">
       <header class="main-header">
         <div class="main-title">
-          <span>BlueAI Copilot Konsole</span>
-          <span>Chat links, Bild‑Generator rechts – alles an einem Ort.</span>
+          <span>BlueAI Copilot console</span>
+          <span>Chat on the left, image tools on the right.</span>
         </div>
         <div class="model-pill">
           <span class="model-pill-dot"></span>
-          BlueAI 1.0 · multimodal‑ready
+          BlueAI 1.2 · multimodal‑ready
         </div>
       </header>
 
@@ -1115,9 +1115,10 @@
         <div class="chat-shell">
           <div class="chat-messages" id="chatMessages">
             <div class="chat-empty" id="chatEmpty">
-              Willkommen im BlueAI‑Chat.<br />
+              Welcome to the BlueAI chat.<br />
               <span>
-                Frag z.B.: „Erkläre mir ein Thema“, „Hilf mir beim Lernen“ oder „Erstelle einen Bild‑Prompt für ein futuristisches Stadt‑Poster“.
+                Ask things like “Explain a topic”, “Help me with JavaScript”, or
+                “Create a prompt for a futuristic city poster”.
               </span>
             </div>
           </div>
@@ -1127,10 +1128,10 @@
                 type="text"
                 id="chatInput"
                 class="chat-input"
-                placeholder="Frage BlueAI etwas …"
+                placeholder="Ask BlueAI anything…"
               />
               <button class="chat-send-btn" id="sendBtn">
-                Senden
+                Send
               </button>
             </div>
             <div class="chat-input-meta">
@@ -1138,10 +1139,10 @@
                 <span class="typing-dot"></span>
                 <span class="typing-dot"></span>
                 <span class="typing-dot"></span>
-                BlueAI 1.0 generiert simulierte Antworten.
+                BlueAI 1.2 generates simulated answers.
               </span>
               <span id="chatMetaHint">
-                Verlauf wird in Firebase gespeichert.
+                History is stored in Firebase per user.
               </span>
             </div>
           </div>
@@ -1151,12 +1152,12 @@
         <div class="image-shell">
           <div class="image-header">
             <div class="image-header-title">
-              <span>BlueAI Bild‑Generator</span>
-              <span>Prompt → Bild‑Prompt + generiertes Canvas‑Bild.</span>
+              <span>BlueAI image generator</span>
+              <span>Prompt → detailed text prompt + canvas image.</span>
             </div>
             <div class="image-header-pill">
               <span></span>
-              BlueAI 1.0 · Visual Mode
+              BlueAI 1.2 · Visual mode
             </div>
           </div>
           <div class="image-main">
@@ -1164,8 +1165,8 @@
               <div class="image-preview-inner">
                 <canvas id="imageCanvas" width="640" height="480"></canvas>
                 <div class="image-placeholder-text" id="imagePlaceholder">
-                  Noch kein Bild generiert.<br />
-                  Gib rechts unten einen Prompt ein, z.B. „Futuristische Stadt bei Nacht mit Neon‑Lichtern“.
+                  No image yet.<br />
+                  Enter a prompt below, e.g. “Futuristic city at night with neon lights”.
                 </div>
               </div>
             </div>
@@ -1175,19 +1176,19 @@
                   type="text"
                   id="imagePromptInput"
                   class="image-input"
-                  placeholder="Beschreibe das Bild, das du sehen willst …"
+                  placeholder="Describe the image you want to see…"
                 />
                 <button class="image-btn" id="imageGenerateBtn">
-                  Bild generieren
+                  Generate
                 </button>
               </div>
               <div class="image-meta">
                 <span>
                   <span class="image-dot"></span>
-                  BlueAI erzeugt einen detaillierten Bild‑Prompt und zeichnet ein Canvas‑Bild.
+                  BlueAI creates a detailed image prompt and draws a canvas image.
                 </span>
                 <span id="imageMetaHint">
-                  Letzter Prompt: keiner
+                  Last prompt: none
                 </span>
               </div>
             </div>
@@ -1212,12 +1213,12 @@
       getDatabase,
       ref,
       push,
-      onChildAdded,
       serverTimestamp,
       set,
+      get,
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-    // Deine Firebase Config
+    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyDFFwtjglnwOc5gITw3FgQYP5vhaicWlIQ",
       authDomain: "blueai-eb780.firebaseapp.com",
@@ -1265,6 +1266,7 @@
     let messageCount = 0;
     let imageCount = 0;
     let isGenerating = false;
+    let historyCache = []; // simple in‑memory history for pseudo‑context
 
     function setAuthMessage(text, type = "error") {
       authMessage.textContent = text;
@@ -1280,7 +1282,7 @@
       currentUser = user;
       authScreen.style.display = "none";
       appShell.style.display = "flex";
-      userInfo.textContent = "Angemeldet als: " + (user.email || user.uid);
+      userInfo.textContent = "Signed in as: " + (user.email || user.uid);
       loadChatHistory();
     }
 
@@ -1306,14 +1308,14 @@
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
       if (!email || !password) {
-        setAuthMessage("Bitte E‑Mail und Passwort eingeben.");
+        setAuthMessage("Please enter email and password.");
         return;
       }
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        setAuthMessage("Erfolgreich angemeldet.", "success");
+        setAuthMessage("Signed in successfully.", "success");
       } catch (err) {
-        setAuthMessage("Login fehlgeschlagen: " + (err.message || err.code));
+        setAuthMessage("Sign in failed: " + (err.message || err.code));
       }
     });
 
@@ -1322,14 +1324,14 @@
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
       if (!email || !password) {
-        setAuthMessage("Bitte E‑Mail und Passwort eingeben.");
+        setAuthMessage("Please enter email and password.");
         return;
       }
       try {
         await createUserWithEmailAndPassword(auth, email, password);
-        setAuthMessage("Konto erstellt und angemeldet.", "success");
+        setAuthMessage("Account created and signed in.", "success");
       } catch (err) {
-        setAuthMessage("Registrierung fehlgeschlagen: " + (err.message || err.code));
+        setAuthMessage("Registration failed: " + (err.message || err.code));
       }
     });
 
@@ -1337,13 +1339,14 @@
       await signOut(auth);
     });
 
-    // CHAT LOGIK
+    // CHAT LOGIC
 
     function clearChatUI() {
       chatMessages.innerHTML = "";
       chatMessages.appendChild(chatEmpty);
       messageCount = 0;
       metricTurns.textContent = "0";
+      historyCache = [];
     }
 
     function appendMessage({ from, text, meta, tag }) {
@@ -1421,95 +1424,151 @@
     function pseudoBlueAIResponse(prompt, history) {
       const lower = prompt.toLowerCase();
       const turns = history.length;
+      const rand = Math.random();
 
       const styleHint =
         turns > 10
-          ? "Ich versuche, deinen bisherigen Stil möglichst genau zu spiegeln."
+          ? "I’m trying to mirror your style as closely as possible."
           : turns > 4
-          ? "Ich nutze deinen bisherigen Verlauf als leichten Kontext."
-          : "Ich antworte bewusst neutral und klar.";
+          ? "I’m lightly using your previous messages as context."
+          : "I’ll keep the answer neutral and clear.";
 
-      const baseIntro =
-        "BlueAI 1.0 antwortet dir mit einem simulierten, aber strukturierten KI‑Modell:\n\n";
+      const baseIntros = [
+        "Here’s how I’d approach this:",
+        "Let me break this down for you:",
+        "I’ll walk you through this step by step:",
+        "Here’s a structured way to think about it:",
+      ];
+      const intro = baseIntros[Math.floor(rand * baseIntros.length)];
 
       const isImagePrompt =
-        lower.includes("bild") ||
         lower.includes("image") ||
+        lower.includes("picture") ||
         lower.includes("poster") ||
         lower.includes("logo") ||
         lower.includes("art") ||
         lower.includes("illustration");
 
+      const isCodePrompt =
+        lower.includes("code") ||
+        lower.includes("javascript") ||
+        lower.includes("react") ||
+        lower.includes("function") ||
+        lower.includes("api");
+
+      const isExplain =
+        lower.includes("explain") ||
+        lower.includes("why") ||
+        lower.includes("how does") ||
+        lower.includes("how do");
+
+      const isStudy =
+        lower.includes("study") ||
+        lower.includes("exam") ||
+        lower.includes("test") ||
+        lower.includes("school");
+
       if (isImagePrompt) {
         return (
-          baseIntro +
-          "🔹 Bild‑Prompt‑Vorschlag:\n\n" +
+          intro +
+          "\n\n" +
+          "🔹 Image prompt suggestion:\n\n" +
           "» " +
           prompt +
           " «\n\n" +
-          "Technische Details:\n" +
-          "- Stil: hochauflösende, cineastische Beleuchtung, weiche volumetrische Lichter\n" +
-          "- Farbstimmung: kräftige Blautöne, Neon‑Akzente, hoher Kontrast\n" +
-          "- Kamera: 35mm, leichte Weitwinkel‑Perspektive, Tiefenschärfe\n" +
-          "- Qualität: 4K, ultra‑detailliert, scharfe Konturen\n\n" +
-          "Du kannst diesen Prompt direkt in einem Bild‑Generator (z.B. Midjourney, DALL·E etc.) verwenden.\n\n" +
+          "Technical details:\n" +
+          "- Style: high‑resolution, cinematic lighting, soft volumetric light\n" +
+          "- Color mood: strong blues, neon accents, high contrast\n" +
+          "- Camera: 35mm, slight wide‑angle, depth of field\n" +
+          "- Quality: 4K, ultra‑detailed, sharp edges\n\n" +
+          "You can paste this into any image model (Midjourney, DALL·E, etc.).\n\n" +
           styleHint
         );
       }
 
-      if (lower.includes("erkläre") || lower.includes("erklären") || lower.includes("warum")) {
+      if (isCodePrompt) {
+        const codeExample =
+`// Example: simple async function in JavaScript
+async function fetchData(url) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("Request failed");
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.error("Error:", err);
+    throw err;
+  }
+}`;
+
         return (
-          baseIntro +
-          "1. Ich fasse das Thema zuerst in einfachen Worten zusammen.\n" +
-          "2. Danach gehe ich tiefer auf Zusammenhänge und Hintergründe ein.\n" +
-          "3. Zum Schluss bekommst du eine Merkhilfe oder ein Beispiel.\n\n" +
-          "Schreib mir gerne dazu, auf welchem Level du bist (Schule, Studium, Beruf), dann passe ich die Erklärung an.\n\n" +
+          intro +
+          "\n\n" +
+          "You’re asking for something code‑related. A good pattern is:\n\n" +
+          "1. Clarify the goal (what should the code actually do?).\n" +
+          "2. Pick a minimal example and get that working.\n" +
+          "3. Then add features step by step.\n\n" +
+          "Here’s a small JavaScript snippet as a reference:\n\n" +
+          codeExample +
+          "\n\n" +
+          "If you tell me your exact stack (e.g. React, Node, plain JS) and goal, I can sketch a more specific solution.\n\n" +
           styleHint
         );
       }
 
-      if (lower.includes("code") || lower.includes("programm") || lower.includes("javascript")) {
+      if (isExplain) {
         return (
-          baseIntro +
-          "Du willst etwas mit Code machen – nice.\n\n" +
-          "- Sag mir Sprache/Framework (z.B. JavaScript, React, Node).\n" +
-          "- Beschreibe kurz dein Ziel (Login‑System, API‑Call, UI‑Komponente, etc.).\n" +
-          "- Ich skizziere dir dann einen klaren Ansatz mit Schritten.\n\n" +
+          intro +
+          "\n\n" +
+          "1. I’ll restate the core idea in simple words.\n" +
+          "2. Then I’ll connect it to something you already know.\n" +
+          "3. Finally, I’ll give you a short example or analogy.\n\n" +
+          "If you tell me your level (school, university, professional), I can tune the explanation.\n\n" +
           styleHint
         );
       }
 
-      if (lower.includes("schule") || lower.includes("lernen") || lower.includes("prüfung")) {
+      if (isStudy) {
         return (
-          baseIntro +
-          "Lernen funktioniert besser mit Struktur:\n\n" +
-          "- Ich kann dir Zusammenfassungen in eigenen Worten bauen.\n" +
-          "- Ich kann dir Lernpläne (z.B. 30‑Minuten‑Blöcke) vorschlagen.\n" +
-          "- Ich kann dir Verständnisfragen geben, die du dir selbst stellen kannst.\n\n" +
-          "Schreib mir Thema + Zeitrahmen (z.B. „Mathe Klausur in 2 Wochen, Thema Bruchrechnung“), dann baue ich dir einen Plan.\n\n" +
+          intro +
+          "\n\n" +
+          "Studying works better with structure:\n\n" +
+          "- Break your topic into small chunks (sub‑topics).\n" +
+          "- Use 25–30 minute focus blocks with short breaks.\n" +
+          "- After each block, write down 3–5 key points from memory.\n\n" +
+          "Tell me your subject + exam date and I can sketch a simple study plan for you.\n\n" +
           styleHint
         );
       }
 
-      if (lower.includes("bewerbung") || lower.includes("lebenslauf") || lower.includes("cv")) {
+      if (lower.includes("cv") || lower.includes("resume") || lower.includes("cover letter")) {
         return (
-          baseIntro +
-          "Ich kann dir helfen mit:\n\n" +
-          "- Formulierungen für Anschreiben\n" +
-          "- Struktur für deinen Lebenslauf\n" +
-          "- Ideen, wie du Projekte/Erfahrungen gut beschreibst\n\n" +
-          "Schreib mir kurz: Job‑Titel, Branche und dein aktueller Stand, dann mache ich dir einen Vorschlag.\n\n" +
+          intro +
+          "\n\n" +
+          "For applications, a clean structure helps a lot:\n\n" +
+          "- Start with a short, clear summary of who you are.\n" +
+          "- Highlight 3–5 key experiences that match the role.\n" +
+          "- Use concrete results (numbers, impact) where possible.\n\n" +
+          "If you tell me the job title and your background, I can draft bullet points or a short paragraph for you.\n\n" +
           styleHint
         );
       }
+
+      // Generic fallback
+      const genericVariants = [
+        "I’ll give you a structured answer with bullet points and, if useful, a short example.",
+        "I’ll try to keep things practical: a quick overview, then concrete suggestions.",
+        "I’ll focus on clarity first, then add a few ideas you can try immediately.",
+      ];
+      const generic = genericVariants[Math.floor(Math.random() * genericVariants.length)];
 
       return (
-        baseIntro +
-        "Ich habe deine Frage verstanden und würde so vorgehen:\n\n" +
-        "- Zuerst kläre ich, worum es dir genau geht.\n" +
-        "- Dann gebe ich dir eine strukturierte Antwort mit Bullet‑Points.\n" +
-        "- Wenn sinnvoll, bekommst du Beispiele oder Formulierungen, die du direkt nutzen kannst.\n\n" +
-        "Wenn du mir mehr Kontext gibst (z.B. „für Social Media“, „für Schule“, „für ein Projekt“), kann ich die Antwort noch genauer auf dich zuschneiden.\n\n" +
+        intro +
+        "\n\n" +
+        generic +
+        "\n\n" +
+        "If you add a bit more context (e.g. “for social media”, “for school”, “for a side project”), I can tune the answer more precisely.\n\n" +
         styleHint
       );
     }
@@ -1524,23 +1583,35 @@
           createdAt: serverTimestamp(),
         });
       } catch (e) {
-        console.warn("Fehler beim Speichern in Firebase:", e);
+        console.warn("Error saving chat message:", e);
       }
     }
 
-    function loadChatHistory() {
+    async function loadChatHistory() {
       if (!currentUser) return;
       clearChatUI();
-      const chatRef = ref(db, "chats/" + currentUser.uid);
-      onChildAdded(chatRef, (snapshot) => {
-        const val = snapshot.val();
-        if (!val) return;
-        appendMessage({
-          from: val.from,
-          text: val.text,
-          meta: val.from === "user" ? "Du" : "BlueAI 1.0",
-        });
-      });
+      try {
+        const chatRef = ref(db, "chats/" + currentUser.uid);
+        const snap = await get(chatRef);
+        if (snap.exists()) {
+          const data = snap.val();
+          const entries = Object.values(data).sort((a, b) => {
+            const ta = a.createdAt || 0;
+            const tb = b.createdAt || 0;
+            return ta - tb;
+          });
+          entries.forEach((msg) => {
+            appendMessage({
+              from: msg.from,
+              text: msg.text,
+              meta: msg.from === "user" ? "You" : "BlueAI 1.2",
+            });
+            historyCache.push({ from: msg.from, text: msg.text });
+          });
+        }
+      } catch (e) {
+        console.warn("Error loading history:", e);
+      }
     }
 
     async function handleSend() {
@@ -1551,29 +1622,30 @@
       appendMessage({
         from: "user",
         text,
-        meta: "Du",
+        meta: "You",
       });
+      historyCache.push({ from: "user", text });
       await saveMessageToDB(currentUser.uid, { from: "user", text });
 
       isGenerating = true;
       sendBtn.disabled = true;
       addTypingIndicator();
 
-      const history = []; // hier könntest du später echten Verlauf übergeben
-      const responseText = pseudoBlueAIResponse(text, history);
+      const responseText = pseudoBlueAIResponse(text, historyCache);
 
       setTimeout(async () => {
         removeTypingIndicator();
         appendMessage({
           from: "assistant",
           text: responseText,
-          meta: "BlueAI 1.0 · simulierte Antwort",
-          tag: text.toLowerCase().includes("bild") ? "Bild‑Prompt" : "Konversation",
+          meta: "BlueAI 1.2 · simulated answer",
+          tag: text.toLowerCase().includes("image") ? "Image prompt" : "Conversation",
         });
+        historyCache.push({ from: "assistant", text: responseText });
         await saveMessageToDB(currentUser.uid, { from: "assistant", text: responseText });
         isGenerating = false;
         sendBtn.disabled = false;
-      }, 800 + Math.random() * 800);
+      }, 700 + Math.random() * 900);
     }
 
     chatInput.addEventListener("keydown", (e) => {
@@ -1585,14 +1657,13 @@
 
     sendBtn.addEventListener("click", handleSend);
 
-    // IMAGE GENERATOR (Canvas, lokal)
+    // IMAGE GENERATOR (Canvas, local)
 
     function drawGeneratedImage(prompt) {
       const ctx = imageCanvas.getContext("2d");
       const w = imageCanvas.width;
       const h = imageCanvas.height;
 
-      // Hintergrund‑Gradient basierend auf Prompt‑Hash
       let hash = 0;
       for (let i = 0; i < prompt.length; i++) {
         hash = (hash * 31 + prompt.charCodeAt(i)) >>> 0;
@@ -1606,7 +1677,6 @@
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
 
-      // „Neon‑Ringe“
       const rings = 6;
       for (let i = 0; i < rings; i++) {
         const radius = (Math.min(w, h) / 2) * (0.2 + i * 0.12);
@@ -1623,7 +1693,6 @@
         ctx.stroke();
       }
 
-      // Text‑Overlay
       const shortPrompt =
         prompt.length > 60 ? prompt.slice(0, 57).trim() + "…" : prompt.trim();
       ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
@@ -1634,10 +1703,10 @@
 
       ctx.fillStyle = "#e5e7eb";
       ctx.font = "14px system-ui";
-      ctx.fillText("BlueAI 1.0 – generierter Prompt", 24, h - 48);
+      ctx.fillText("BlueAI 1.2 – generated prompt", 24, h - 48);
       ctx.fillStyle = "#9ca3af";
       ctx.font = "12px system-ui";
-      ctx.fillText(shortPrompt || "Kein Prompt", 24, h - 28);
+      ctx.fillText(shortPrompt || "No prompt", 24, h - 28);
 
       imagePlaceholder.style.display = "none";
     }
@@ -1651,7 +1720,7 @@
           createdAt: serverTimestamp(),
         });
       } catch (e) {
-        console.warn("Fehler beim Speichern des Bild‑Prompts:", e);
+        console.warn("Error saving image prompt:", e);
       }
     }
 
@@ -1662,7 +1731,8 @@
       drawGeneratedImage(prompt);
       imageCount++;
       metricImages.textContent = String(imageCount);
-      imageMetaHint.textContent = "Letzter Prompt: " + (prompt.length > 40 ? prompt.slice(0, 37) + "…" : prompt);
+      imageMetaHint.textContent =
+        "Last prompt: " + (prompt.length > 40 ? prompt.slice(0, 37) + "…" : prompt);
       saveImagePromptToDB(currentUser.uid, prompt);
     }
 
@@ -1674,7 +1744,7 @@
       }
     });
 
-    // Initial Canvas leeren
+    // Initial canvas background
     (function initCanvas() {
       const ctx = imageCanvas.getContext("2d");
       const w = imageCanvas.width;
