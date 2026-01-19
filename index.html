@@ -321,10 +321,17 @@
       background: radial-gradient(circle at top left, #020617 0, #020617 40%, #000 100%);
       border: 1px solid rgba(148, 163, 184, 0.25);
       box-shadow: var(--shadow-strong);
+      display: none;
+    }
+
+    .app-shell-inner {
+      display: flex;
+      width: 100%;
+      height: 100%;
     }
 
     .sidebar {
-      width: 280px;
+      width: 260px;
       background: radial-gradient(circle at top left, #020617 0, #020617 40%, #020617 100%);
       border-right: 1px solid rgba(148, 163, 184, 0.2);
       padding: 18px 16px 16px 16px;
@@ -540,38 +547,6 @@
       background: #22c55e;
     }
 
-    .main-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
-      gap: 10px;
-      flex: 1;
-      min-height: 0;
-    }
-
-    @media (max-width: 980px) {
-      .app-shell {
-        margin: 0;
-        border-radius: 0;
-      }
-      .main-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .sidebar {
-        width: 240px;
-      }
-    }
-
-    @media (max-width: 780px) {
-      .app-shell {
-        flex-direction: column;
-      }
-      .sidebar {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
-      }
-    }
-
     /* CHAT PANEL */
 
     .chat-shell {
@@ -583,6 +558,8 @@
       flex-direction: column;
       overflow: hidden;
       position: relative;
+      flex: 1;
+      min-height: 0;
     }
 
     .chat-messages {
@@ -634,6 +611,13 @@
     .chat-message.user .bubble {
       background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(79, 70, 229, 0.95));
       border-color: rgba(129, 140, 248, 0.95);
+    }
+
+    .bubble img {
+      max-width: 260px;
+      border-radius: 12px;
+      margin-top: 6px;
+      display: block;
     }
 
     .bubble-meta {
@@ -767,168 +751,30 @@
         transform: translateY(0);
       }
       50% {
-        opacity: 1;
-        transform: translateY(-2px);
+      opacity: 1;
+      transform: translateY(-2px);
       }
     }
 
-    /* IMAGE PANEL */
-
-    .image-shell {
-      border-radius: var(--radius-xl);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), #020617);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      position: relative;
+    @media (max-width: 980px) {
+      .app-shell {
+        margin: 0;
+        border-radius: 0;
+      }
+      .sidebar {
+        width: 230px;
+      }
     }
 
-    .image-header {
-      padding: 10px 14px 6px 14px;
-      border-bottom: 1px solid rgba(55, 65, 81, 0.9);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-    }
-
-    .image-header-title {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .image-header-title span:first-child {
-      font-weight: 500;
-    }
-
-    .image-header-title span:last-child {
-      color: var(--text-soft);
-      font-size: 11px;
-    }
-
-    .image-header-pill {
-      border-radius: 999px;
-      padding: 4px 8px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 10px;
-      color: #9ca3af;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .image-header-pill span {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #22c55e;
-    }
-
-    .image-main {
-      flex: 1;
-      display: grid;
-      grid-template-rows: minmax(0, 1fr) auto;
-    }
-
-    .image-preview {
-      padding: 10px 12px 6px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at top, #020617, #000);
-    }
-
-    .image-preview-inner {
-      width: 100%;
-      max-width: 360px;
-      aspect-ratio: 4 / 3;
-      border-radius: 18px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: radial-gradient(circle at top left, #0f172a, #020617);
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .image-placeholder-text {
-      font-size: 11px;
-      color: #6b7280;
-      text-align: center;
-      padding: 0 16px;
-    }
-
-    .image-prompt-row {
-      padding: 8px 12px 10px 12px;
-      border-top: 1px solid rgba(55, 65, 81, 0.9);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), #020617);
-    }
-
-    .image-input-main {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .image-input {
-      flex: 1;
-      border-radius: 999px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.97);
-      padding: 8px 12px;
-      font-size: 12px;
-      color: var(--text);
-      outline: none;
-    }
-
-    .image-input::placeholder {
-      color: #6b7280;
-    }
-
-    .image-btn {
-      border-radius: 999px;
-      border: none;
-      padding: 8px 12px;
-      font-size: 12px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: white;
-      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.9);
-      white-space: nowrap;
-    }
-
-    .image-meta {
-      font-size: 10px;
-      color: #6b7280;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .image-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .image-dot {
-      width: 4px;
-      height: 4px;
-      border-radius: 999px;
-      background: #22c55e;
+    @media (max-width: 780px) {
+      .app-shell-inner {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      }
     }
   </style>
 </head>
@@ -954,7 +800,7 @@
           <div>
             <div class="auth-title">Sign in to BlueAI 1.2</div>
             <div class="auth-sub">
-              Use your account so BlueAI can store your chat history and image prompts securely in Firebase.
+              Use your account so BlueAI can store your chat history securely in Firebase.
             </div>
           </div>
 
@@ -1005,21 +851,20 @@
           <div class="auth-right-card">
             <div class="auth-right-title">What BlueAI 1.2 can do</div>
             <div>
-              BlueAI 1.2 is a simulated AI model in your own interface:
-              chat answers, explanations, coding help, prompt generation and a canvas‑based image generator.
+              BlueAI 1.2 is your own AI interface: chat, explanations, coding help and image responses directly in the chat.
             </div>
             <div class="auth-right-grid">
               <div class="auth-right-pill">
                 <div class="auth-right-pill-label">Chat</div>
-                <div class="auth-right-pill-value">Context‑aware, multiple answer styles</div>
+                <div class="auth-right-pill-value">Context‑aware answers</div>
               </div>
               <div class="auth-right-pill">
                 <div class="auth-right-pill-label">Code</div>
-                <div class="auth-right-pill-value">Explains and sketches code snippets</div>
+                <div class="auth-right-pill-value">Explains & writes snippets</div>
               </div>
               <div class="auth-right-pill">
                 <div class="auth-right-pill-label">Images</div>
-                <div class="auth-right-pill-value">Prompt + generated canvas image</div>
+                <div class="auth-right-pill-value">Generates images from prompts</div>
               </div>
               <div class="auth-right-pill">
                 <div class="auth-right-pill-label">Hosting</div>
@@ -1027,7 +872,7 @@
               </div>
             </div>
             <div class="auth-right-footer">
-              After login you land in the BlueAI console with chat and image tools side by side.
+              After login you land in the BlueAI console with a clean chat interface.
             </div>
           </div>
         </div>
@@ -1037,88 +882,86 @@
 
   <!-- APP SHELL -->
   <div class="app-shell" id="appShell">
-    <aside class="sidebar">
-      <div class="sidebar-brand-row">
-        <div class="brand-logo">
-          <div class="brand-logo-inner"></div>
+    <div class="app-shell-inner">
+      <aside class="sidebar">
+        <div class="sidebar-brand-row">
+          <div class="brand-logo">
+            <div class="brand-logo-inner"></div>
+          </div>
+          <div>
+            <div class="sidebar-brand-text-main">
+              BlueAI
+              <span class="brand-badge">1.2</span>
+            </div>
+            <div class="sidebar-brand-sub">Copilot console</div>
+          </div>
         </div>
+
         <div>
-          <div class="sidebar-brand-text-main">
-            BlueAI
-            <span class="brand-badge">1.2</span>
+          <div class="sidebar-section-title">Modes & capabilities</div>
+          <div class="chip-row">
+            <div class="chip">
+              <span class="chip-dot"></span>
+              Chat & explanations
+            </div>
+            <div class="chip">
+              Coding help
+              <span class="chip-pill">JS / pseudo</span>
+            </div>
+            <div class="chip">
+              Image replies
+              <span class="chip-pill">Prompt → image</span>
+            </div>
           </div>
-          <div class="sidebar-brand-sub">Copilot console</div>
         </div>
-      </div>
 
-      <div>
-        <div class="sidebar-section-title">Modes & capabilities</div>
-        <div class="chip-row">
-          <div class="chip">
-            <span class="chip-dot"></span>
-            Chat & explanations
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">BlueAI 1.2 session</div>
+          <div>
+            Your messages are stored in your private history and used as context for better answers.
           </div>
-          <div class="chip">
-            Coding help
-            <span class="chip-pill">JS / pseudo</span>
-          </div>
-          <div class="chip">
-            Image generator
-            <span class="chip-pill">Canvas</span>
+          <div class="sidebar-metric-row">
+            <div class="sidebar-metric">
+              <div class="sidebar-metric-label">Messages</div>
+              <div class="sidebar-metric-value" id="metric-turns">0</div>
+            </div>
+            <div class="sidebar-metric">
+              <div class="sidebar-metric-label">Images</div>
+              <div class="sidebar-metric-value" id="metric-images">0</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="sidebar-card">
-        <div class="sidebar-card-title">BlueAI 1.2 session</div>
-        <div>
-          Your messages are stored in your private history and used as “pseudo‑training” to simulate style awareness.
+        <div class="sidebar-footer">
+          <span>
+            <span class="status-dot"></span>
+            BlueAI 1.2 is ready.
+          </span>
+          <button class="logout-btn" id="logoutBtn">
+            ⎋ Sign out
+          </button>
+          <span id="userInfo"></span>
         </div>
-        <div class="sidebar-metric-row">
-          <div class="sidebar-metric">
-            <div class="sidebar-metric-label">Messages</div>
-            <div class="sidebar-metric-value" id="metric-turns">0</div>
+      </aside>
+
+      <main class="main">
+        <header class="main-header">
+          <div class="main-title">
+            <span>BlueAI Copilot chat</span>
+            <span>Ask anything: explanations, code, prompts, images.</span>
           </div>
-          <div class="sidebar-metric">
-            <div class="sidebar-metric-label">Image prompts</div>
-            <div class="sidebar-metric-value" id="metric-images">0</div>
+          <div class="model-pill">
+            <span class="model-pill-dot"></span>
+            BlueAI 1.2 · multimodal‑style
           </div>
-        </div>
-      </div>
+        </header>
 
-      <div class="sidebar-footer">
-        <span>
-          <span class="status-dot"></span>
-          BlueAI 1.2 is ready.
-        </span>
-        <button class="logout-btn" id="logoutBtn">
-          ⎋ Sign out
-        </button>
-        <span id="userInfo"></span>
-      </div>
-    </aside>
-
-    <main class="main">
-      <header class="main-header">
-        <div class="main-title">
-          <span>BlueAI Copilot console</span>
-          <span>Chat on the left, image tools on the right.</span>
-        </div>
-        <div class="model-pill">
-          <span class="model-pill-dot"></span>
-          BlueAI 1.2 · multimodal‑ready
-        </div>
-      </header>
-
-      <section class="main-grid">
-        <!-- CHAT PANEL -->
-        <div class="chat-shell">
+        <section class="chat-shell">
           <div class="chat-messages" id="chatMessages">
             <div class="chat-empty" id="chatEmpty">
               Welcome to the BlueAI chat.<br />
               <span>
-                Ask things like “Explain a topic”, “Help me with JavaScript”, or
-                “Create a prompt for a futuristic city poster”.
+                Try: “Explain async/await”, “Generate an image of a neon city”, or “Help me debug this code”.
               </span>
             </div>
           </div>
@@ -1139,63 +982,16 @@
                 <span class="typing-dot"></span>
                 <span class="typing-dot"></span>
                 <span class="typing-dot"></span>
-                BlueAI 1.2 generates simulated answers.
+                BlueAI 1.2 generates answers and images.
               </span>
               <span id="chatMetaHint">
                 History is stored in Firebase per user.
               </span>
             </div>
           </div>
-        </div>
-
-        <!-- IMAGE PANEL -->
-        <div class="image-shell">
-          <div class="image-header">
-            <div class="image-header-title">
-              <span>BlueAI image generator</span>
-              <span>Prompt → detailed text prompt + canvas image.</span>
-            </div>
-            <div class="image-header-pill">
-              <span></span>
-              BlueAI 1.2 · Visual mode
-            </div>
-          </div>
-          <div class="image-main">
-            <div class="image-preview">
-              <div class="image-preview-inner">
-                <canvas id="imageCanvas" width="640" height="480"></canvas>
-                <div class="image-placeholder-text" id="imagePlaceholder">
-                  No image yet.<br />
-                  Enter a prompt below, e.g. “Futuristic city at night with neon lights”.
-                </div>
-              </div>
-            </div>
-            <div class="image-prompt-row">
-              <div class="image-input-main">
-                <input
-                  type="text"
-                  id="imagePromptInput"
-                  class="image-input"
-                  placeholder="Describe the image you want to see…"
-                />
-                <button class="image-btn" id="imageGenerateBtn">
-                  Generate
-                </button>
-              </div>
-              <div class="image-meta">
-                <span>
-                  <span class="image-dot"></span>
-                  BlueAI creates a detailed image prompt and draws a canvas image.
-                </span>
-                <span id="imageMetaHint">
-                  Last prompt: none
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </div>
   </div>
 
   <script type="module">
@@ -1218,7 +1014,7 @@
       get,
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-    // Firebase config
+    // --- Firebase config ---
     const firebaseConfig = {
       apiKey: "AIzaSyDFFwtjglnwOc5gITw3FgQYP5vhaicWlIQ",
       authDomain: "blueai-eb780.firebaseapp.com",
@@ -1234,6 +1030,13 @@
     const analytics = getAnalytics(app);
     const auth = getAuth(app);
     const db = getDatabase(app);
+
+    // --- Gemini config (hidden in UI, but frontend can’t fully hide keys) ---
+    const GEMINI_API_KEY = "AIzaSyC6b1TNa5C6sdcrqe-59d2STxpj_XGnUaU";
+    const GEMINI_TEXT_MODEL =
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent";
+    const GEMINI_IMAGE_MODEL =
+      "https://generativelanguage.googleapis.com/v1beta/models/imagegeneration:generateImage";
 
     // AUTH UI
     const authScreen = document.getElementById("authScreen");
@@ -1256,17 +1059,11 @@
     const chatInput = document.getElementById("chatInput");
     const sendBtn = document.getElementById("sendBtn");
 
-    const imageCanvas = document.getElementById("imageCanvas");
-    const imagePlaceholder = document.getElementById("imagePlaceholder");
-    const imagePromptInput = document.getElementById("imagePromptInput");
-    const imageGenerateBtn = document.getElementById("imageGenerateBtn");
-    const imageMetaHint = document.getElementById("imageMetaHint");
-
     let currentUser = null;
     let messageCount = 0;
     let imageCount = 0;
     let isGenerating = false;
-    let historyCache = []; // simple in‑memory history for pseudo‑context
+    let historyCache = [];
 
     function setAuthMessage(text, type = "error") {
       authMessage.textContent = text;
@@ -1281,7 +1078,7 @@
     function showApp(user) {
       currentUser = user;
       authScreen.style.display = "none";
-      appShell.style.display = "flex";
+      appShell.style.display = "block";
       userInfo.textContent = "Signed in as: " + (user.email || user.uid);
       loadChatHistory();
     }
@@ -1339,17 +1136,19 @@
       await signOut(auth);
     });
 
-    // CHAT LOGIC
+    // CHAT UI
 
     function clearChatUI() {
       chatMessages.innerHTML = "";
       chatMessages.appendChild(chatEmpty);
       messageCount = 0;
+      imageCount = 0;
       metricTurns.textContent = "0";
+      metricImages.textContent = "0";
       historyCache = [];
     }
 
-    function appendMessage({ from, text, meta, tag }) {
+    function appendMessage({ from, text, meta, tag, imageDataUrl }) {
       if (chatEmpty.parentElement === chatMessages) {
         chatEmpty.remove();
       }
@@ -1361,7 +1160,17 @@
 
       const bubble = document.createElement("div");
       bubble.className = "bubble";
-      bubble.textContent = text;
+
+      if (text) {
+        bubble.textContent = text;
+      }
+
+      if (imageDataUrl) {
+        const img = document.createElement("img");
+        img.src = imageDataUrl;
+        img.alt = "Generated by BlueAI";
+        bubble.appendChild(img);
+      }
 
       if (meta || tag) {
         const metaDiv = document.createElement("div");
@@ -1386,8 +1195,10 @@
       wrapper.appendChild(bubble);
       chatMessages.appendChild(wrapper);
       chatMessages.scrollTop = chatMessages.scrollHeight;
-      messageCount++;
-      metricTurns.textContent = String(messageCount);
+      if (from === "user" || from === "assistant") {
+        messageCount++;
+        metricTurns.textContent = String(messageCount);
+      }
     }
 
     function addTypingIndicator() {
@@ -1421,165 +1232,14 @@
       if (el) el.remove();
     }
 
-    function pseudoBlueAIResponse(prompt, history) {
-      const lower = prompt.toLowerCase();
-      const turns = history.length;
-      const rand = Math.random();
-
-      const styleHint =
-        turns > 10
-          ? "I’m trying to mirror your style as closely as possible."
-          : turns > 4
-          ? "I’m lightly using your previous messages as context."
-          : "I’ll keep the answer neutral and clear.";
-
-      const baseIntros = [
-        "Here’s how I’d approach this:",
-        "Let me break this down for you:",
-        "I’ll walk you through this step by step:",
-        "Here’s a structured way to think about it:",
-      ];
-      const intro = baseIntros[Math.floor(rand * baseIntros.length)];
-
-      const isImagePrompt =
-        lower.includes("image") ||
-        lower.includes("picture") ||
-        lower.includes("poster") ||
-        lower.includes("logo") ||
-        lower.includes("art") ||
-        lower.includes("illustration");
-
-      const isCodePrompt =
-        lower.includes("code") ||
-        lower.includes("javascript") ||
-        lower.includes("react") ||
-        lower.includes("function") ||
-        lower.includes("api");
-
-      const isExplain =
-        lower.includes("explain") ||
-        lower.includes("why") ||
-        lower.includes("how does") ||
-        lower.includes("how do");
-
-      const isStudy =
-        lower.includes("study") ||
-        lower.includes("exam") ||
-        lower.includes("test") ||
-        lower.includes("school");
-
-      if (isImagePrompt) {
-        return (
-          intro +
-          "\n\n" +
-          "🔹 Image prompt suggestion:\n\n" +
-          "» " +
-          prompt +
-          " «\n\n" +
-          "Technical details:\n" +
-          "- Style: high‑resolution, cinematic lighting, soft volumetric light\n" +
-          "- Color mood: strong blues, neon accents, high contrast\n" +
-          "- Camera: 35mm, slight wide‑angle, depth of field\n" +
-          "- Quality: 4K, ultra‑detailed, sharp edges\n\n" +
-          "You can paste this into any image model (Midjourney, DALL·E, etc.).\n\n" +
-          styleHint
-        );
-      }
-
-      if (isCodePrompt) {
-        const codeExample =
-`// Example: simple async function in JavaScript
-async function fetchData(url) {
-  try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error("Request failed");
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.error("Error:", err);
-    throw err;
-  }
-}`;
-
-        return (
-          intro +
-          "\n\n" +
-          "You’re asking for something code‑related. A good pattern is:\n\n" +
-          "1. Clarify the goal (what should the code actually do?).\n" +
-          "2. Pick a minimal example and get that working.\n" +
-          "3. Then add features step by step.\n\n" +
-          "Here’s a small JavaScript snippet as a reference:\n\n" +
-          codeExample +
-          "\n\n" +
-          "If you tell me your exact stack (e.g. React, Node, plain JS) and goal, I can sketch a more specific solution.\n\n" +
-          styleHint
-        );
-      }
-
-      if (isExplain) {
-        return (
-          intro +
-          "\n\n" +
-          "1. I’ll restate the core idea in simple words.\n" +
-          "2. Then I’ll connect it to something you already know.\n" +
-          "3. Finally, I’ll give you a short example or analogy.\n\n" +
-          "If you tell me your level (school, university, professional), I can tune the explanation.\n\n" +
-          styleHint
-        );
-      }
-
-      if (isStudy) {
-        return (
-          intro +
-          "\n\n" +
-          "Studying works better with structure:\n\n" +
-          "- Break your topic into small chunks (sub‑topics).\n" +
-          "- Use 25–30 minute focus blocks with short breaks.\n" +
-          "- After each block, write down 3–5 key points from memory.\n\n" +
-          "Tell me your subject + exam date and I can sketch a simple study plan for you.\n\n" +
-          styleHint
-        );
-      }
-
-      if (lower.includes("cv") || lower.includes("resume") || lower.includes("cover letter")) {
-        return (
-          intro +
-          "\n\n" +
-          "For applications, a clean structure helps a lot:\n\n" +
-          "- Start with a short, clear summary of who you are.\n" +
-          "- Highlight 3–5 key experiences that match the role.\n" +
-          "- Use concrete results (numbers, impact) where possible.\n\n" +
-          "If you tell me the job title and your background, I can draft bullet points or a short paragraph for you.\n\n" +
-          styleHint
-        );
-      }
-
-      // Generic fallback
-      const genericVariants = [
-        "I’ll give you a structured answer with bullet points and, if useful, a short example.",
-        "I’ll try to keep things practical: a quick overview, then concrete suggestions.",
-        "I’ll focus on clarity first, then add a few ideas you can try immediately.",
-      ];
-      const generic = genericVariants[Math.floor(Math.random() * genericVariants.length)];
-
-      return (
-        intro +
-        "\n\n" +
-        generic +
-        "\n\n" +
-        "If you add a bit more context (e.g. “for social media”, “for school”, “for a side project”), I can tune the answer more precisely.\n\n" +
-        styleHint
-      );
-    }
-
     async function saveMessageToDB(userId, message) {
       try {
         const chatRef = ref(db, "chats/" + userId);
         const newRef = push(chatRef);
         await set(newRef, {
           from: message.from,
-          text: message.text,
+          text: message.text || "",
+          image: message.image || null,
           createdAt: serverTimestamp(),
         });
       } catch (e) {
@@ -1605,13 +1265,113 @@ async function fetchData(url) {
               from: msg.from,
               text: msg.text,
               meta: msg.from === "user" ? "You" : "BlueAI 1.2",
+              tag: msg.image ? "Image" : "Conversation",
+              imageDataUrl: msg.image || undefined,
             });
             historyCache.push({ from: msg.from, text: msg.text });
+            if (msg.image) {
+              imageCount++;
+            }
           });
+          metricImages.textContent = String(imageCount);
         }
       } catch (e) {
         console.warn("Error loading history:", e);
       }
+    }
+
+    // GEMINI CALLS
+
+    async function callGeminiText(prompt, history) {
+      const messages = history.slice(-8).map((m) => ({
+        role: m.from === "user" ? "user" : "model",
+        parts: [{ text: m.text }],
+      }));
+      messages.push({ role: "user", parts: [{ text: prompt }] });
+
+      const body = {
+        contents: messages,
+      };
+
+      const res = await fetch(GEMINI_TEXT_MODEL + "?key=" + GEMINI_API_KEY, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      if (!res.ok) {
+        throw new Error("Gemini text error: " + res.status);
+      }
+
+      const data = await res.json();
+      const candidates = data.candidates || [];
+      const first = candidates[0];
+      if (!first || !first.content || !first.content.parts) {
+        return "I couldn’t generate a response right now.";
+      }
+      const textParts = first.content.parts
+        .filter((p) => p.text)
+        .map((p) => p.text)
+        .join("\n");
+      return textParts || "I couldn’t generate a response right now.";
+    }
+
+    async function callGeminiImage(prompt) {
+      const body = {
+        prompt: {
+          text: prompt,
+        },
+        // simple config
+        imageGenerationConfig: {
+          numberOfImages: 1,
+          aspectRatio: "4:3",
+        },
+      };
+
+      const res = await fetch(GEMINI_IMAGE_MODEL + "?key=" + GEMINI_API_KEY, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      if (!res.ok) {
+        throw new Error("Gemini image error: " + res.status);
+      }
+
+      const data = await res.json();
+      const images = data.images || data.generatedImages || data.candidates || [];
+      // API shape can vary; we try a few common patterns
+      let base64 = null;
+
+      if (Array.isArray(images) && images.length > 0) {
+        const img = images[0];
+        if (img.base64) base64 = img.base64;
+        if (img.image && img.image.base64) base64 = img.image.base64;
+      }
+
+      if (!base64 && data.image && data.image.base64) {
+        base64 = data.image.base64;
+      }
+
+      if (!base64) {
+        throw new Error("No image data returned.");
+      }
+
+      return "data:image/png;base64," + base64;
+    }
+
+    function looksLikeImagePrompt(text) {
+      const lower = text.toLowerCase();
+      return (
+        lower.includes("generate an image") ||
+        lower.includes("draw") ||
+        lower.includes("create an image") ||
+        lower.includes("picture of") ||
+        lower.includes("image of") ||
+        lower.includes("logo of") ||
+        lower.includes("poster of") ||
+        lower.includes("art of")
+      );
     }
 
     async function handleSend() {
@@ -1619,6 +1379,7 @@ async function fetchData(url) {
       const text = chatInput.value.trim();
       if (!text) return;
       chatInput.value = "";
+
       appendMessage({
         from: "user",
         text,
@@ -1631,21 +1392,63 @@ async function fetchData(url) {
       sendBtn.disabled = true;
       addTypingIndicator();
 
-      const responseText = pseudoBlueAIResponse(text, historyCache);
+      try {
+        let imageDataUrl = null;
+        let answerText = "";
 
-      setTimeout(async () => {
+        const wantsImage = looksLikeImagePrompt(text);
+
+        if (wantsImage) {
+          // First get a short description from Gemini text (for better image prompt)
+          const promptForImage =
+            "Create a concise, visual description for an image based on this request (no extra text, just the description): " +
+            text;
+          const visualDesc = await callGeminiText(promptForImage, historyCache);
+          // Then call image model
+          try {
+            imageDataUrl = await callGeminiImage(visualDesc);
+            imageCount++;
+            metricImages.textContent = String(imageCount);
+            answerText =
+              "Here is an image based on your request:\n\n" + visualDesc.trim();
+          } catch (imgErr) {
+            console.warn(imgErr);
+            answerText =
+              "I tried to generate an image, but something went wrong. Here is a text description instead:\n\n" +
+              visualDesc.trim();
+          }
+        } else {
+          answerText = await callGeminiText(text, historyCache);
+        }
+
         removeTypingIndicator();
         appendMessage({
           from: "assistant",
-          text: responseText,
-          meta: "BlueAI 1.2 · simulated answer",
-          tag: text.toLowerCase().includes("image") ? "Image prompt" : "Conversation",
+          text: answerText,
+          meta: "BlueAI 1.2",
+          tag: imageDataUrl ? "Image" : "Conversation",
+          imageDataUrl,
         });
-        historyCache.push({ from: "assistant", text: responseText });
-        await saveMessageToDB(currentUser.uid, { from: "assistant", text: responseText });
+
+        historyCache.push({ from: "assistant", text: answerText });
+        await saveMessageToDB(currentUser.uid, {
+          from: "assistant",
+          text: answerText,
+          image: imageDataUrl || null,
+        });
+      } catch (err) {
+        console.error(err);
+        removeTypingIndicator();
+        appendMessage({
+          from: "assistant",
+          text: "Something went wrong while generating the answer. Please try again.",
+          meta: "BlueAI 1.2 · error",
+          tag: "Error",
+        });
+      } finally {
         isGenerating = false;
         sendBtn.disabled = false;
-      }, 700 + Math.random() * 900);
+      }
     }
 
     chatInput.addEventListener("keydown", (e) => {
@@ -1656,105 +1459,6 @@ async function fetchData(url) {
     });
 
     sendBtn.addEventListener("click", handleSend);
-
-    // IMAGE GENERATOR (Canvas, local)
-
-    function drawGeneratedImage(prompt) {
-      const ctx = imageCanvas.getContext("2d");
-      const w = imageCanvas.width;
-      const h = imageCanvas.height;
-
-      let hash = 0;
-      for (let i = 0; i < prompt.length; i++) {
-        hash = (hash * 31 + prompt.charCodeAt(i)) >>> 0;
-      }
-      const hue1 = hash % 360;
-      const hue2 = (hash * 3) % 360;
-
-      const grad = ctx.createLinearGradient(0, 0, w, h);
-      grad.addColorStop(0, `hsl(${hue1}, 80%, 18%)`);
-      grad.addColorStop(1, `hsl(${hue2}, 80%, 8%)`);
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, w, h);
-
-      const rings = 6;
-      for (let i = 0; i < rings; i++) {
-        const radius = (Math.min(w, h) / 2) * (0.2 + i * 0.12);
-        ctx.beginPath();
-        ctx.arc(
-          w / 2 + Math.sin(hash + i) * 20,
-          h / 2 + Math.cos(hash + i) * 20,
-          radius,
-          0,
-          Math.PI * 2
-        );
-        ctx.strokeStyle = `hsla(${(hue1 + i * 20) % 360}, 90%, 60%, 0.35)`;
-        ctx.lineWidth = 3;
-        ctx.stroke();
-      }
-
-      const shortPrompt =
-        prompt.length > 60 ? prompt.slice(0, 57).trim() + "…" : prompt.trim();
-      ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
-      ctx.fillRect(16, h - 70, w - 32, 54);
-      ctx.strokeStyle = "rgba(148, 163, 184, 0.6)";
-      ctx.lineWidth = 1;
-      ctx.strokeRect(16.5, h - 69.5, w - 33, 53);
-
-      ctx.fillStyle = "#e5e7eb";
-      ctx.font = "14px system-ui";
-      ctx.fillText("BlueAI 1.2 – generated prompt", 24, h - 48);
-      ctx.fillStyle = "#9ca3af";
-      ctx.font = "12px system-ui";
-      ctx.fillText(shortPrompt || "No prompt", 24, h - 28);
-
-      imagePlaceholder.style.display = "none";
-    }
-
-    async function saveImagePromptToDB(userId, prompt) {
-      try {
-        const imgRef = ref(db, "imagePrompts/" + userId);
-        const newRef = push(imgRef);
-        await set(newRef, {
-          prompt,
-          createdAt: serverTimestamp(),
-        });
-      } catch (e) {
-        console.warn("Error saving image prompt:", e);
-      }
-    }
-
-    function handleGenerateImage() {
-      if (!currentUser) return;
-      const prompt = imagePromptInput.value.trim();
-      if (!prompt) return;
-      drawGeneratedImage(prompt);
-      imageCount++;
-      metricImages.textContent = String(imageCount);
-      imageMetaHint.textContent =
-        "Last prompt: " + (prompt.length > 40 ? prompt.slice(0, 37) + "…" : prompt);
-      saveImagePromptToDB(currentUser.uid, prompt);
-    }
-
-    imageGenerateBtn.addEventListener("click", handleGenerateImage);
-    imagePromptInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
-        handleGenerateImage();
-      }
-    });
-
-    // Initial canvas background
-    (function initCanvas() {
-      const ctx = imageCanvas.getContext("2d");
-      const w = imageCanvas.width;
-      const h = imageCanvas.height;
-      const grad = ctx.createLinearGradient(0, 0, w, h);
-      grad.addColorStop(0, "#020617");
-      grad.addColorStop(1, "#000000");
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, w, h);
-    })();
   </script>
 </body>
 </html>
