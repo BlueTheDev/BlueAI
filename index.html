@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>BlueAI 1.0 – Dein KI Copilot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #020817;
+      --bg-elevated: #020b1f;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+      --accent-strong: rgba(37, 99, 235, 0.35);
+      --border-subtle: #1f2937;
+      --text: #e5e7eb;
+      --text-soft: #9ca3af;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --shadow-chip: 0 10px 25px rgba(15, 23, 42, 0.9);
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background: radial-gradient(circle at top, #0b1120 0, #020617 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .app-shell {
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+      margin: 24px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: radial-gradient(circle at top left, #020617 0, #020617 40%, #000 100%);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.9);
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+      width: 280px;
+      background: radial-gradient(circle at top left, #020617 0, #020617 40%, #020617 100%);
+      border-right: 1px solid rgba(148, 163, 184, 0.15);
+      padding: 18px 18px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: conic-gradient(from 180deg, #0ea5e9, #2563eb, #4f46e5, #0ea5e9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9), 0 12px 30px rgba(37, 99, 235, 0.7);
+      position: relative;
+    }
+
+    .brand-logo-inner {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #e0f2fe 0, #1d4ed8 45%, #020617 100%);
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.9);
+    }
+
+    .brand-text-main {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.18);
+      border: 1px solid rgba(96, 165, 250, 0.4);
+      color: #bfdbfe;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .sidebar-section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6b7280;
+      margin-top: 8px;
+      margin-bottom: 6px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: #e5e7eb;
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), rgba(15, 23, 42, 0.9));
+      box-shadow: var(--shadow-chip);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: default;
+    }
+
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .chip-pill {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: #9ca3af;
+    }
+
+    .sidebar-card {
+      border-radius: 18px;
+      padding: 12px 12px 12px 12px;
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .sidebar-card-title {
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .sidebar-card-sub {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-metric-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .sidebar-metric {
+      flex: 1;
+      border-radius: 999px;
+      padding: 6px 8px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sidebar-metric-label {
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .sidebar-metric-value {
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      font-size: 11px;
+      color: #6b7280;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sidebar-footer span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .logout-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      padding: 6px 10px;
+      font-size: 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logout-btn:hover {
+      background: rgba(31, 41, 55, 0.9);
+    }
+
+    /* MAIN */
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 18px 18px 18px 18px;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .main-title {
+      font-size: 18px;
+      font-weight: 500;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .main-title span:nth-child(2) {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .model-pill {
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 11px;
+      border: 1px solid rgba(96, 165, 250, 0.6);
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.3), rgba(15, 23, 42, 0.95));
+      color: #dbeafe;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-chip);
+    }
+
+    .model-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .auth-card {
+      border-radius: 18px;
+      padding: 16px 16px 14px 16px;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .auth-card-left {
+      flex: 1;
+    }
+
+    .auth-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .auth-sub {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .auth-input {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #e5e7eb;
+      min-width: 160px;
+      outline: none;
+    }
+
+    .auth-input::placeholder {
+      color: #6b7280;
+    }
+
+    .auth-btn {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: white;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.7);
+      white-space: nowrap;
+    }
+
+    .auth-btn.secondary {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+      box-shadow: none;
+    }
+
+    .auth-error {
+      font-size: 11px;
+      color: var(--danger);
+      margin-top: 6px;
+    }
+
+    .auth-success {
+      font-size: 11px;
+      color: var(--success);
+      margin-top: 6px;
+    }
+
+    .auth-card-right {
+      width: 180px;
+      font-size: 11px;
+      color: #9ca3af;
+      border-left: 1px dashed rgba(75, 85, 99, 0.8);
+      padding-left: 12px;
+    }
+
+    .auth-card-right strong {
+      color: #e5e7eb;
+    }
+
+    /* CHAT */
+
+    .chat-shell {
+      flex: 1;
+      border-radius: 18px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), #020617);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 14px 16px 10px 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      scroll-behavior: smooth;
+    }
+
+    .chat-message {
+      display: flex;
+      gap: 10px;
+      max-width: 90%;
+    }
+
+    .chat-message.user {
+      margin-left: auto;
+      flex-direction: row-reverse;
+    }
+
+    .avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #e0f2fe 0, #1d4ed8 45%, #020617 100%);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9);
+      flex-shrink: 0;
+    }
+
+    .avatar.user {
+      background: radial-gradient(circle at 30% 20%, #f97316 0, #ea580c 45%, #020617 100%);
+    }
+
+    .bubble {
+      border-radius: 16px;
+      padding: 8px 10px;
+      font-size: 13px;
+      line-height: 1.4;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      position: relative;
+    }
+
+    .chat-message.user .bubble {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(79, 70, 229, 0.9));
+      border-color: rgba(129, 140, 248, 0.9);
+    }
+
+    .bubble-meta {
+      font-size: 10px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    .bubble-tag {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #9ca3af;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .bubble-tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .chat-empty {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 13px;
+      color: #9ca3af;
+      padding: 0 40px;
+    }
+
+    .chat-empty span {
+      display: block;
+      margin-top: 6px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .chat-input-row {
+      padding: 10px 12px 10px 12px;
+      border-top: 1px solid rgba(55, 65, 81, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), #020617);
+    }
+
+    .chat-input-main {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .chat-input {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #e5e7eb;
+      outline: none;
+    }
+
+    .chat-input::placeholder {
+      color: #6b7280;
+    }
+
+    .chat-send-btn {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: white;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.7);
+      white-space: nowrap;
+    }
+
+    .chat-send-btn:disabled {
+      opacity: 0.5;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    .chat-input-meta {
+      font-size: 10px;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-input-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .typing-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: #9ca3af;
+      animation: pulse 1.2s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.3;
+        transform: translateY(0);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+    }
+
+    .badge-auth-required {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      color: #9ca3af;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-auth-required span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #f97316;
+    }
+
+    @media (max-width: 900px) {
+      .app-shell {
+        flex-direction: column;
+        margin: 0;
+        border-radius: 0;
+      }
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .auth-card {
+        flex-direction: column;
+      }
+      .auth-card-right {
+        width: 100%;
+        border-left: none;
+        border-top: 1px dashed rgba(75, 85, 99, 0.8);
+        padding-left: 0;
+        padding-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-row">
+        <div class="brand-logo">
+          <div class="brand-logo-inner"></div>
+        </div>
+        <div>
+          <div class="brand-text-main">
+            BlueAI
+            <span class="brand-badge">Model 1.0</span>
+          </div>
+          <div class="brand-sub">Dein persönlicher KI‑Copilot</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sidebar-section-title">Modus & Fähigkeiten</div>
+        <div class="chip-row">
+          <div class="chip">
+            <span class="chip-dot"></span>
+            Konversation
+          </div>
+          <div class="chip">
+            Bild‑Prompts
+            <span class="chip-pill">Generierung simuliert</span>
+          </div>
+          <div class="chip">
+            Kontext
+            <span class="chip-pill">Chat‑Verlauf</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">BlueAI 1.0 Trainingsprofil</div>
+        <div class="sidebar-card-sub">
+          Antworten werden in deinem privaten Chat‑Verlauf gespeichert und als „Pseudo‑Training“ genutzt, um bessere Vorschläge zu simulieren.
+        </div>
+        <div class="sidebar-metric-row">
+          <div class="sidebar-metric">
+            <div class="sidebar-metric-label">Session‑Kontext</div>
+            <div class="sidebar-metric-value" id="metric-turns">0 Nachrichten</div>
+          </div>
+          <div class="sidebar-metric">
+            <div class="sidebar-metric-label">Antwort‑Stil</div>
+            <div class="sidebar-metric-value" id="metric-style">Ausgewogen</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <span>
+          <span class="status-dot"></span>
+          BlueAI 1.0 ist bereit für deine Fragen.
+        </span>
+        <button class="logout-btn" id="logoutBtn" style="display:none;">
+          ⎋ Abmelden
+        </button>
+        <span id="userInfo"></span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="main-header">
+        <div class="main-title">
+          <span>BlueAI Copilot Oberfläche</span>
+          <span>Stell Fragen, lass dir Ideen bauen oder simuliere Bild‑Prompts.</span>
+        </div>
+        <div class="model-pill">
+          <span class="model-pill-dot"></span>
+          BlueAI 1.0 · multimodal‑ready
+        </div>
+      </header>
+
+      <section class="auth-card" id="authCard">
+        <div class="auth-card-left">
+          <div class="auth-title">Login oder Registrierung</div>
+          <div class="auth-sub">
+            Melde dich an, damit BlueAI deinen Chat‑Verlauf sicher in Firebase speichert.
+          </div>
+          <form class="auth-form" id="authForm">
+            <input
+              type="email"
+              id="emailInput"
+              class="auth-input"
+              placeholder="E‑Mail"
+              required
+            />
+            <input
+              type="password"
+              id="passwordInput"
+              class="auth-input"
+              placeholder="Passwort"
+              required
+            />
+            <button type="submit" class="auth-btn" id="loginBtn">
+              Anmelden
+            </button>
+            <button type="button" class="auth-btn secondary" id="registerBtn">
+              Registrieren
+            </button>
+          </form>
+          <div id="authMessage"></div>
+        </div>
+        <div class="auth-card-right">
+          <strong>Hinweis:</strong>  
+          BlueAI nutzt Firebase Authentication und Realtime Database.  
+          Dein Chat‑Verlauf ist nur für dein Konto lesbar.  
+          Du kannst später echte Bild‑APIs anbinden – aktuell werden Bild‑Prompts textuell simuliert.
+        </div>
+      </section>
+
+      <section class="chat-shell">
+        <div class="chat-messages" id="chatMessages">
+          <div class="chat-empty" id="chatEmpty">
+            Willkommen bei <strong>BlueAI 1.0</strong>.<br />
+            <span>
+              Melde dich an, stelle eine Frage wie<br />
+              „Erstelle mir einen Bild‑Prompt für ein futuristisches Stadt‑Poster“<br />
+              oder „Hilf mir beim Lernen für die Schule“.
+            </span>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <div class="chat-input-main">
+            <input
+              type="text"
+              id="chatInput"
+              class="chat-input"
+              placeholder="Frage BlueAI etwas …"
+            />
+            <button class="chat-send-btn" id="sendBtn" disabled>
+              Senden
+            </button>
+          </div>
+          <div class="chat-input-meta">
+            <span>
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+              BlueAI 1.0 generiert Antworten lokal simuliert.
+            </span>
+            <span id="authHint">
+              <span class="badge-auth-required">
+                <span></span>
+                Anmeldung erforderlich, um Chat zu speichern.
+              </span>
+            </span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    // Firebase v10 modular via CDN
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword,
+      signOut,
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import {
+      getDatabase,
+      ref,
+      push,
+      onChildAdded,
+      serverTimestamp,
+      set,
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    // Deine Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDFFwtjglnwOc5gITw3FgQYP5vhaicWlIQ",
+      authDomain: "blueai-eb780.firebaseapp.com",
+      databaseURL: "https://blueai-eb780-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "blueai-eb780",
+      storageBucket: "blueai-eb780.firebasestorage.app",
+      messagingSenderId: "802037300238",
+      appId: "1:802037300238:web:1a3dadb0e899a4721a105f",
+      measurementId: "G-DC08K7LNRV",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    // UI Elemente
+    const authForm = document.getElementById("authForm");
+    const emailInput = document.getElementById("emailInput");
+    const passwordInput = document.getElementById("passwordInput");
+    const loginBtn = document.getElementById("loginBtn");
+    const registerBtn = document.getElementById("registerBtn");
+    const authMessage = document.getElementById("authMessage");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const userInfo = document.getElementById("userInfo");
+    const authCard = document.getElementById("authCard");
+    const authHint = document.getElementById("authHint");
+
+    const chatMessages = document.getElementById("chatMessages");
+    const chatEmpty = document.getElementById("chatEmpty");
+    const chatInput = document.getElementById("chatInput");
+    const sendBtn = document.getElementById("sendBtn");
+    const metricTurns = document.getElementById("metric-turns");
+
+    let currentUser = null;
+    let messageCount = 0;
+    let isGenerating = false;
+
+    function setAuthMessage(text, type = "error") {
+      authMessage.textContent = text;
+      authMessage.className = type === "error" ? "auth-error" : "auth-success";
+    }
+
+    function clearAuthMessage() {
+      authMessage.textContent = "";
+      authMessage.className = "";
+    }
+
+    function updateAuthUI(user) {
+      if (user) {
+        currentUser = user;
+        authCard.style.display = "none";
+        logoutBtn.style.display = "inline-flex";
+        userInfo.textContent = "Angemeldet als: " + (user.email || user.uid);
+        authHint.innerHTML =
+          '<span style="font-size:11px;color:#9ca3af;">Chat‑Verlauf wird in Firebase gespeichert.</span>';
+        sendBtn.disabled = false;
+        loadChatHistory();
+      } else {
+        currentUser = null;
+        authCard.style.display = "flex";
+        logoutBtn.style.display = "none";
+        userInfo.textContent = "";
+        authHint.innerHTML =
+          '<span class="badge-auth-required"><span></span>Anmeldung erforderlich, um Chat zu speichern.</span>';
+        sendBtn.disabled = true;
+        clearChatUI();
+      }
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      updateAuthUI(user);
+    });
+
+    authForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      clearAuthMessage();
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+      if (!email || !password) {
+        setAuthMessage("Bitte E‑Mail und Passwort eingeben.");
+        return;
+      }
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        setAuthMessage("Erfolgreich angemeldet.", "success");
+      } catch (err) {
+        setAuthMessage("Login fehlgeschlagen: " + (err.message || err.code));
+      }
+    });
+
+    registerBtn.addEventListener("click", async () => {
+      clearAuthMessage();
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+      if (!email || !password) {
+        setAuthMessage("Bitte E‑Mail und Passwort eingeben.");
+        return;
+      }
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        setAuthMessage("Konto erstellt und angemeldet.", "success");
+      } catch (err) {
+        setAuthMessage("Registrierung fehlgeschlagen: " + (err.message || err.code));
+      }
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+    });
+
+    function clearChatUI() {
+      chatMessages.innerHTML = "";
+      chatMessages.appendChild(chatEmpty);
+      messageCount = 0;
+      metricTurns.textContent = "0 Nachrichten";
+    }
+
+    function appendMessage({ from, text, meta, tag }) {
+      if (chatEmpty.parentElement === chatMessages) {
+        chatEmpty.remove();
+      }
+      const wrapper = document.createElement("div");
+      wrapper.className = "chat-message " + (from === "user" ? "user" : "assistant");
+
+      const avatar = document.createElement("div");
+      avatar.className = "avatar" + (from === "user" ? " user" : "");
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.textContent = text;
+
+      if (meta || tag) {
+        const metaDiv = document.createElement("div");
+        metaDiv.className = "bubble-meta";
+        metaDiv.textContent = meta || "";
+        bubble.appendChild(metaDiv);
+      }
+
+      if (tag) {
+        const tagDiv = document.createElement("div");
+        tagDiv.className = "bubble-tag";
+        const dot = document.createElement("span");
+        dot.className = "bubble-tag-dot";
+        tagDiv.appendChild(dot);
+        const label = document.createElement("span");
+        label.textContent = tag;
+        tagDiv.appendChild(label);
+        bubble.appendChild(tagDiv);
+      }
+
+      wrapper.appendChild(avatar);
+      wrapper.appendChild(bubble);
+      chatMessages.appendChild(wrapper);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      messageCount++;
+      metricTurns.textContent = messageCount + " Nachrichten";
+    }
+
+    function addTypingIndicator() {
+      const wrapper = document.createElement("div");
+      wrapper.className = "chat-message assistant";
+      wrapper.id = "typingIndicator";
+
+      const avatar = document.createElement("div");
+      avatar.className = "avatar";
+
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      const dots = document.createElement("div");
+      dots.style.display = "inline-flex";
+      dots.style.gap = "4px";
+      ["", "", ""].forEach(() => {
+        const d = document.createElement("span");
+        d.className = "typing-dot";
+        dots.appendChild(d);
+      });
+      bubble.appendChild(dots);
+
+      wrapper.appendChild(avatar);
+      wrapper.appendChild(bubble);
+      chatMessages.appendChild(wrapper);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      const el = document.getElementById("typingIndicator");
+      if (el) el.remove();
+    }
+
+    function pseudoBlueAIResponse(prompt, history) {
+      const lower = prompt.toLowerCase();
+      const isImagePrompt =
+        lower.includes("bild") ||
+        lower.includes("image") ||
+        lower.includes("poster") ||
+        lower.includes("logo") ||
+        lower.includes("art") ||
+        lower.includes("illustration");
+
+      const turns = history.length;
+      const styleHint =
+        turns > 8
+          ? "Ich versuche, deinen bisherigen Stil zu spiegeln."
+          : turns > 3
+          ? "Ich nutze deinen bisherigen Verlauf als leichten Kontext."
+          : "Ich antworte neutral und klar.";
+
+      if (isImagePrompt) {
+        return (
+          "Hier ist ein detaillierter Bild‑Prompt, den du in einem Bild‑Generator nutzen kannst:\n\n" +
+          "» " +
+          prompt +
+          " «\n\n" +
+          "Technische Details:\n" +
+          "- Stil: hochauflösende, cineastische Beleuchtung, weiche volumetrische Lichter\n" +
+          "- Farbstimmung: kräftige Blautöne, Neon‑Akzente, hoher Kontrast\n" +
+          "- Kamera: 35mm, leichte Weitwinkel‑Perspektive, Tiefenschärfe\n" +
+          "- Qualität: 4K, ultra‑detailliert, scharfe Konturen\n\n" +
+          "Hinweis: BlueAI 1.0 simuliert aktuell nur die Prompt‑Generierung – du kannst diesen Text in Midjourney, DALL·E oder einem anderen Bild‑Tool verwenden.\n\n" +
+          styleHint
+        );
+      }
+
+      if (lower.includes("erkläre") || lower.includes("erklären") || lower.includes("warum")) {
+        return (
+          "Gerne erkläre ich dir das Schritt für Schritt:\n\n" +
+          "1. Ich fasse das Thema zuerst in einfachen Worten zusammen.\n" +
+          "2. Danach gehe ich etwas tiefer und zeige dir Zusammenhänge.\n" +
+          "3. Zum Schluss bekommst du ein kurzes Beispiel oder eine Merkhilfe.\n\n" +
+          "Wenn du magst, kannst du mir sagen, auf welchem Niveau du dich gerade befindest (z.B. Schule, Studium, Beruf), dann passe ich die Erklärung an.\n\n" +
+          styleHint
+        );
+      }
+
+      if (lower.includes("code") || lower.includes("programm") || lower.includes("javascript")) {
+        return (
+          "Du möchtest etwas mit Code machen – nice.\n\n" +
+          "Ich kann dir z.B. helfen, kleine Snippets zu entwerfen, dir die Struktur zu erklären oder dir Ideen geben, wie du dein Projekt aufbauen kannst.\n" +
+          "Beschreib mir kurz:\n" +
+          "- Sprache/Framework (z.B. JavaScript, React, Node)\n" +
+          "- Ziel (z.B. Login‑System, API‑Call, UI‑Komponente)\n\n" +
+          "Dann skizziere ich dir einen klaren Ansatz.\n\n" +
+          styleHint
+        );
+      }
+
+      if (lower.includes("schule") || lower.includes("lernen") || lower.includes("prüfung")) {
+        return (
+          "Lernen ist viel leichter, wenn man Struktur reinbringt.\n\n" +
+          "Ich kann dir z.B. helfen mit:\n" +
+          "- Zusammenfassungen in eigenen Worten\n" +
+          "- Lernplänen (z.B. 30‑Minuten‑Blöcke)\n" +
+          "- Verständnisfragen, die du dir selbst stellen kannst\n\n" +
+          "Schreib mir einfach das Thema + dein Ziel (z.B. „Mathe Klausur in 2 Wochen, Thema Bruchrechnung“), dann baue ich dir einen Plan.\n\n" +
+          styleHint
+        );
+      }
+
+      return (
+        "Spannende Frage. Ich versuche, dir eine klare, strukturierte Antwort zu geben:\n\n" +
+        "- Ich fasse zuerst kurz zusammen, worum es geht.\n" +
+        "- Dann gehe ich auf Details ein, die für dich relevant sein könnten.\n" +
+        "- Wenn sinnvoll, gebe ich dir Beispiele oder Formulierungen, die du direkt nutzen kannst.\n\n" +
+        "Wenn du mir mehr Kontext gibst (z.B. „für Bewerbung“, „für Social Media“, „für Schule“), kann ich die Antwort noch genauer auf dich zuschneiden.\n\n" +
+        styleHint
+      );
+    }
+
+    async function saveMessageToDB(userId, message) {
+      try {
+        const chatRef = ref(db, "chats/" + userId);
+        const newRef = push(chatRef);
+        await set(newRef, {
+          from: message.from,
+          text: message.text,
+          createdAt: serverTimestamp(),
+        });
+      } catch (e) {
+        console.warn("Fehler beim Speichern in Firebase:", e);
+      }
+    }
+
+    function loadChatHistory() {
+      if (!currentUser) return;
+      clearChatUI();
+      const chatRef = ref(db, "chats/" + currentUser.uid);
+      onChildAdded(chatRef, (snapshot) => {
+        const val = snapshot.val();
+        if (!val) return;
+        appendMessage({
+          from: val.from,
+          text: val.text,
+          meta: val.from === "user" ? "Du" : "BlueAI 1.0",
+        });
+      });
+    }
+
+    async function handleSend() {
+      if (!currentUser || isGenerating) return;
+      const text = chatInput.value.trim();
+      if (!text) return;
+      chatInput.value = "";
+      appendMessage({
+        from: "user",
+        text,
+        meta: "Du",
+      });
+      await saveMessageToDB(currentUser.uid, { from: "user", text });
+
+      isGenerating = true;
+      sendBtn.disabled = true;
+      addTypingIndicator();
+
+      const history = []; // hier könntest du später echten Verlauf übergeben
+      const responseText = pseudoBlueAIResponse(text, history);
+
+      setTimeout(async () => {
+        removeTypingIndicator();
+        appendMessage({
+          from: "assistant",
+          text: responseText,
+          meta: "BlueAI 1.0 · simulierte Antwort",
+          tag: text.toLowerCase().includes("bild") ? "Bild‑Prompt" : "Konversation",
+        });
+        await saveMessageToDB(currentUser.uid, { from: "assistant", text: responseText });
+        isGenerating = false;
+        sendBtn.disabled = !currentUser;
+      }, 800 + Math.random() * 800);
+    }
+
+    chatInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        handleSend();
+      }
+    });
+
+    sendBtn.addEventListener("click", handleSend);
+  </script>
+</body>
+</html>
